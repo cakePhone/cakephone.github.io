@@ -1,12 +1,12 @@
 <script>
-	import Link from './components/Link.svelte';
-	import Card from './components/Card.svelte';
-	import Section from './components/Section.svelte';
+	import Link from '../components/Link.svelte';
+	import Card from '../components/Card.svelte';
+	import Section from '../components/Section.svelte';
 	import { AppShell, Avatar, TableOfContents, LightSwitch } from '@skeletonlabs/skeleton';
 	import Icon from '@iconify/svelte';
 
   function getImageURL(name) {
-    return new URL(`./imgs/${name}.jpg`, import.meta.url).href
+    return new URL(`../imgs/${name}.jpg`, import.meta.url).href
   }
 
 	let age = calculateAge();
@@ -76,7 +76,7 @@
 	<main class="lg:p-6" id="main">
 		<Section>
 			<h2 class="h2" slot="title">My projects</h2>
-			<div class="mt-6 flex flex-wrap" slot="content">
+			<div class="mt-6 flex flex-wrap lg:space-x-6" slot="content">
 				<Card
 					title="Oreo Home Page"
 					description="A customizable Home Page, built with Vue 3 for all your non-ugly browser needs."
@@ -91,14 +91,6 @@
 					image={getImageURL('OreoSweeper')}
 					link="https://cakephone.github.io/OreoSweeper"
 					github="https://github.com/cakephone/oreosweeper"
-				/>
-
-				<Card
-					title="Volumeter"
-					description="A small school project providing hearing tests in partnership with EcoEscolas"
-					image={getImageURL('Volumeter')}
-					link="https://cakephone.github.io/volumeter"
-					github="https://github.com/cakePhone/volumeter"
 				/>
 			</div>
 		</Section>
