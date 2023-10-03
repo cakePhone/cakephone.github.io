@@ -76,7 +76,7 @@
 	<main class="lg:p-6" id="main">
 		<Section>
 			<h2 class="h2" slot="title">My projects</h2>
-			<div class="mt-6 flex flex-wrap lg:space-x-6" slot="content">
+			<div class="mt-6 flex flex-wrap lg:gap-6" slot="content">
 				<Card
 					title="Oreo Home Page"
 					description="A customizable Home Page, built with Vue 3 for all your non-ugly browser needs."
@@ -115,12 +115,12 @@
 					<img
 						src={getImageURL('internship')}
 						alt="Miguel at an internship"
-						class="my-2 w-full rounded-token lg:m-2 lg:h-80 lg:w-fit"
+						class="my-2 w-full rounded-token lg:h-80 lg:w-max lg:m-2"
 					/>
 					<img
 						src={getImageURL('internship-beach')}
 						alt="Miguel during his free time of the internship"
-						class="my-2 w-full rounded-token lg:m-2 lg:h-80 lg:w-fit"
+						class="my-2 w-full rounded-token lg:h-80 lg:w-max lg:m-2"
 					/>
 				</div>
 
