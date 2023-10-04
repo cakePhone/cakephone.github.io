@@ -17,20 +17,19 @@ jobs:
       #   with:
       #     version: 8
 
-      - name: Install Node.js
-        uses: actions/setup-node@v3
+      - name: Install Bun
+        uses: oven-sh/setup-bun@v1
         with:
-          node-version: 18
-          cache: npm
+          bun-version: latest
 
       - name: Install dependencies
-        run: npm install
+        run: bun install
 
       - name: build
         env:
-          BASE_PATH: '/OreoPortfolio'
+          BASE_PATH: ''
         run: |
-          npm run build
+          bun run build
           touch build/.nojekyll
 
       - name: Upload Artifacts
