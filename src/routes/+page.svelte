@@ -1,13 +1,12 @@
 <script>
 	import Link from '../components/Link.svelte';
 	import Card from '../components/Card.svelte';
-	import Section from '../components/Section.svelte';
 	import { AppShell, Avatar, TableOfContents, LightSwitch } from '@skeletonlabs/skeleton';
 	import Icon from '@iconify/svelte';
 
-  function getImageURL(name) {
-    return new URL(`../imgs/${name}.jpg`, import.meta.url).href
-  }
+	function getImageURL(name) {
+		return new URL(`../imgs/${name}.jpg`, import.meta.url).href;
+	}
 
 	let age = calculateAge();
 
@@ -26,7 +25,7 @@
 		<div class="flex h-full flex-col p-4">
 			<h1 class="h2 mb-4 text-center">My Portfolio</h1>
 			<div
-				class="bg-surface-200-700-token h-[9.7rem] overflow-hidden p-4 transition-all rounded-container-token hover:h-96"
+				class="bg-surface-200-700-token overflow-hidden p-4 transition-all rounded-container-token"
 			>
 				<div class="flex flex-col items-center">
 					<Avatar src={getImageURL('pfp')} class="mb-4 h-20 w-20" />
@@ -39,13 +38,12 @@
 					<Link to="mailto:miguelandrelealsantos.business@gmail.com" name="Email" icon="email" />
 				</div>
 			</div>
-			<p class="m-2 text-center opacity-50">^ Hover it ^</p>
 			<TableOfContents
 				target="#main"
 				scrollParent="#main"
 				label="Here's what's on the page"
 				width="w-fit"
-				class="flex flex-auto"
+				class="mt-6 flex flex-auto"
 			/>
 
 			<footer
@@ -65,18 +63,20 @@
 			<Avatar src={getImageURL('pfp')} class="h-20 w-20" />
 			<h2 class="h2">Miguel<br />Santos</h2>
 		</div>
-		<div class="mt-6 flex flex-col items-center justify-center text-center">
-			<h4 class="h4">Contacts</h4>
+		<h4 class="h4 mt-6 text-center">Contacts</h4>
+		<div class="flex flex-col items-center justify-center text-center md:flex-row">
 			<Link to="https://github.com/cakePhone" name="Github" icon="github" />
 			<Link to="https://instagram.com/cakephoneig" name="Instagram" icon="instagram" />
 			<Link to="mailto:miguelandrelealsantos.business@gmail.com" name="Email" icon="email" />
 		</div>
 	</div>
 
-	<main class="lg:p-6" id="main">
-		<Section>
-			<h2 class="h2" slot="title">My projects</h2>
-			<div class="mt-6 flex flex-wrap lg:gap-6" slot="content">
+	<main class="flex flex-col flex-wrap lg:flex-row lg:gap-6 lg:p-6" id="main">
+    <div
+			class="bg-surface-200-700-token flex h-fit flex-col gap-6 justify-self-center p-6 lg:rounded-token"
+		>
+			<h2 class="h2 text-center lg:text-left">My projects</h2>
+			<div class="flex flex-col items-center gap-6">
 				<Card
 					title="Oreo Home Page"
 					description="A customizable Home Page, built with Vue 3 for all your non-ugly browser needs."
@@ -92,13 +92,19 @@
 					link="https://cakephone.github.io/OreoSweeper"
 					github="https://github.com/cakephone/oreosweeper"
 				/>
-			</div>
-		</Section>
 
-		<Section>
-			<h2 class="h2" slot="title">A little about me</h2>
-			<div class="mt-4" slot="content">
-				<p class="leading-relaxed">
+				<Card
+					title="SkyMuse"
+					description="An Android weather app built with Svelte and CapacitorJS using OpenMeteo's API."
+					image="https://github.com/cakePhone/SkyMuse/blob/main/Images/default.png?raw=true"
+					github="https://github.com/cakephone/SkyMuse"
+				/>
+			</div>
+		</div>
+		<div class="bg-surface-200-700-token h-fit p-6 flex flex-col items-center lg:items-start lg:min-w-[50ch] lg:rounded-token">
+			<h2 class="h2">A little about me</h2>
+			<div class="mt-4 max-w-prose">
+				<p class="leading-relaxed text-justify">
 					Hi! I'm Miguel Santos, a {age} year old Portuguese self-taught web developer. I work mainly
 					with Svelte, used for this website, but I have some knowledge with Vue and React. The latter
 					being my least worked with.
@@ -111,21 +117,21 @@
 					>, in under a week. In that internship, I learnt a bit more of Python, working with APIs
 					and a small library known by all, turtle. And hey! That's me while at it!
 				</p>
-				<div class="flex flex-wrap">
+				<div class="flex flex-wrap gap-4 py-4">
 					<img
 						src={getImageURL('internship')}
 						alt="Miguel at an internship"
-						class="my-2 w-full rounded-token lg:h-80 lg:w-max lg:m-2"
+						class="w-full object-cover rounded-token lg:h-72 lg:w-max"
 					/>
 					<img
 						src={getImageURL('internship-beach')}
 						alt="Miguel during his free time of the internship"
-						class="my-2 w-full rounded-token lg:h-80 lg:w-max lg:m-2"
+						class="w-full object-cover rounded-token lg:h-72 lg:w-max"
 					/>
 				</div>
 
 				<h3 class="h3 mt-4">What got me into coding</h3>
-				<p class="mt-2 leading-relaxed">
+				<p class="mt-2 leading-relaxed text-justify">
 					I've always been keen on computers, my first electronic device was an android tablet when
 					I was only 5-6 years old. I can't remember the exact model, but I know that not soon after
 					I managed to find ways of cracking my favourite and fastest growing game at the time,
@@ -138,7 +144,7 @@
 				</p>
 
 				<h3 class="h3 mt-4">My personality</h3>
-				<p class="mt-2 leading-relaxed">
+				<p class="mt-2 leading-relaxed text-justify">
 					I'm a very casual person around those I meet, especially with friends, despite the initial
 					interaction barrier being quite hard to break for me. I work mainly alone, but I'm open to
 					team work.
@@ -149,7 +155,52 @@
 					I find useless or without meaning.
 				</p>
 			</div>
-		</Section>
+
+      <div class="items-center bg-surface-300-600-token p-4 rounded-token mt-6">
+        <h3 class="h3">Skills</h3>
+        <div class="mt-4 flex gap-4">
+          <div>
+            <h4 class="h4">Social</h4>
+            <label class="mt-2 w-48">
+              <p>Team work</p>
+              <progress value="0.5" class="bg-surface-50-900-token" />
+            </label>
+            <label class="mt-2 w-48">
+              <p>Communication</p>
+              <progress value="0.8" class="bg-surface-50-900-token"/>
+            </label>
+          </div>
+  
+          <div>
+            <h4 class="h4">Programming</h4>
+            <label class="mt-2 w-48">
+              <p>Python</p>
+              <progress value="0.4" class="bg-surface-50-900-token"/>
+            </label>
+          </div>
+  
+          <div>
+            <h4 class="h4">Web Development</h4>
+            <label class="mt-2 w-48">
+              <p>HTML/CSS</p>
+              <progress value="1" class="bg-surface-50-900-token"/>
+            </label>
+            <label class="mt-2 w-48">
+              <p>JavaScript/TypeScript</p>
+              <progress value="0.9" class="bg-surface-50-900-token"/>
+            </label>
+            <label class="mt-2 w-48">
+              <p>SvelteKit</p>
+              <progress value="0.7" class="bg-surface-50-900-token"/>
+            </label>
+            <label class="mt-2 w-48">
+              <p>Vue 3</p>
+              <progress value="0.8" class="bg-surface-50-900-token"/>
+            </label>
+          </div>
+        </div>
+      </div>
+		</div>
 	</main>
 
 	<svelte:fragment slot="pageFooter">
