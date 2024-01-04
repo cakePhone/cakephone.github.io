@@ -25,6 +25,7 @@
     color: var(--on-primary);
     background-color: var(--primary);
     font-family: var(--ff-headings);
+    text-align: center;
 
     outline: none;
     text-decoration: none;
@@ -55,7 +56,7 @@
     background-color: #74bbff;
 
     transition: all 100ms;
-    box-shadow: 0 0 10px rgb(0 0 0 / 20);
+    box-shadow: 0 -2px 10px rgb(0 0 0 / 20);
   }
 
   a:active::before,

@@ -1,24 +1,36 @@
 <script lang="ts">
   import "../app.css";
   import Bubble from "$lib/components/bubble.svelte";
-  import {windowWidth} from "$lib/stores";
+  import {bubblesRightSide, windowWidth} from "$lib/stores";
+  import {onMount} from "svelte";
+  import bubble from "$lib/components/bubble.svelte";
 
   let updatedWindowWidth: number = 0;
   function updateWindowWidth(width: number) {
     windowWidth.set(width)
   }
 
-  $: updateWindowWidth(updatedWindowWidth)
+  let height: number = 0;
+  let scroll: number = 0;
+  let bubblesOnRight: boolean;
+  let dissipate: boolean = false;
+
+  onMount(() => {
+    bubblesRightSide.subscribe((value: boolean) => bubblesOnRight = value)
+  })
+
+  $: updateWindowWidth(updatedWindowWidth);
+  $: dissipate = scroll > height / 2;
 </script>
 
-<svelte:window bind:innerWidth={updatedWindowWidth}></svelte:window>
+<svelte:window bind:innerWidth={updatedWindowWidth} bind:innerHeight={height} bind:scrollY={scroll}></svelte:window>
 
 <div id="background">
-  <div id="bubble-container">
-    <Bubble color="#f2e2ba"/>
-    <Bubble color="#f2bac9"/>
-    <Bubble color="#baf2d8"/>
-    <Bubble color="#ff99c8"/>
+  <div id="bubble-container" class:bubbles-right={bubblesOnRight && updatedWindowWidth > 600}>
+    <Bubble color="#f2e2ba" dissipate={dissipate}/>
+    <Bubble color="#f2bac9" dissipate={dissipate}/>
+    <Bubble color="#baf2d8" dissipate={dissipate}/>
+    <Bubble color="#ff99c8" dissipate={dissipate}/>
   </div>
 </div>
 
