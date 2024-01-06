@@ -110,12 +110,8 @@ body.change-colors {
 #bubble-container {
   z-index: -2;
   position: relative;
-  margin-left: 100px;
+  margin-left: 60%;
   transition: all 1s;
-}
-
-#bubble-container.bubbles-right {
-  margin-left: calc(100% - 500px);
 }
 
 h1,

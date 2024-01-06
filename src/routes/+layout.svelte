@@ -1,8 +1,7 @@
 <script lang="ts">
   import "../app.css";
   import Bubble from "$lib/components/bubble.svelte";
-  import { bubblesRightSide, windowWidth } from "$lib/stores";
-  import { onMount } from "svelte";
+  import { windowWidth } from "$lib/stores";
   import { Body } from "svelte-body";
 
   let updatedWindowWidth: number = 0;
@@ -12,12 +11,7 @@
 
   let height: number = 0;
   let scroll: number = 0;
-  let bubblesOnRight: boolean;
   let dissipate: boolean = false;
-
-  onMount(() => {
-    bubblesRightSide.subscribe((value: boolean) => (bubblesOnRight = value));
-  });
 
   $: updateWindowWidth(updatedWindowWidth);
   $: dissipate = scroll > height * 0.4;
@@ -49,10 +43,7 @@
       <feBlend in="SourceGraphic" in2="monoNoise" mode="screen" />
     </filter>
   </svg>
-  <div
-    id="bubble-container"
-    class:bubbles-right={bubblesOnRight && updatedWindowWidth > 600}
-  >
+  <div id="bubble-container">
     <Bubble color="#f2e2ba" {dissipate} />
     <Bubble color="#f2bac9" {dissipate} />
     <Bubble color="#baf2d8" {dissipate} />
