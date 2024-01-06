@@ -12,14 +12,18 @@
   </h1>
   <div class="fade-pop-up-in welcome__details" style="--delay: 2s;">
     <h2>Contact me:</h2>
-    <a href="mailto:miguelandrelealsantos.business@gmail.com">-Gmail-</a>
-    <a href="https://github.com/cakePhone">-Github-</a>
-    <a href="https://www.instagram.com/cakephoneig">-Intagram-</a>
+    <div>
+      <a href="mailto:miguelandrelealsantos.business@gmail.com">-Gmail-</a>
+      <a href="https://github.com/cakePhone">-Github-</a>
+      <a href="https://www.instagram.com/cakephoneig">-Intagram-</a>
+    </div>
   </div>
   <div class="fade-pop-up-in welcome__details" style="--delay: 2.5s;">
     <h2>Or try:</h2>
-    <a href="#takingaread" class="id-anchor">takingaread</a>
-    <a href="" class="id-anchor">checkingmyprojects</a>
+    <div>
+      <a href="#takingaread" class="id-anchor">takingaread</a>
+      <a href="#checkingmyprojects" class="id-anchor">checking<wbr/>my<wbr/>projects</a>
+    </div>
   </div>
 </section>
 <hr />

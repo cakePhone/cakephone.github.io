@@ -177,21 +177,27 @@ h6 {
 
 .welcome__details {
   display: flex;
-  gap: 1rem;
+  flex-wrap: wrap;
+  gap: 3rem;
 
   font-size: calc(var(--fs-headings) / 1.2);
 }
 
-.welcome__details h2 {
-  margin: 0 2rem 0 0;
+.welcome__details div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
 }
 
 .welcome__details a {
   position: relative;
-  margin-right: 2rem;
 
   text-align: center;
   text-decoration: none;
+}
+
+.welcome__details h2 {
+  margin: 0;
 }
 
 .welcome__details a:after {
@@ -354,5 +360,9 @@ footer p, footer a {
   article {
     padding: 0 2rem;
     max-width: 100%;
+  }
+
+  footer {
+    padding: 1rem;
   }
 }
