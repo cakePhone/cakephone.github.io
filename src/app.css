@@ -258,6 +258,21 @@ article img {
   margin-block: 1rem;
 }
 
+footer {
+  display: flex;
+  flex-wrap: wrap;
+
+  max-width: 75ch;
+
+  width: 100%;
+  padding: 0 2rem;
+  margin-inline: auto;
+}
+
+footer p, footer a {
+  margin: 1rem 0 0;
+}
+
 /* == Animations == */
 .fade-pop-up-in {
   position: relative;

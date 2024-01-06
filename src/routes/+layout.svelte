@@ -60,6 +60,11 @@
   </div>
 </div>
 
-<main>
+<main id="top">
   <slot />
 </main>
+<hr>
+<footer>
+  <p>&copy; Miguel Santos - 2024 | Made with love ❤️ | <a href="#top">Go back to top</a></p>
+  <p>This website doesn't use cookies, so take as many as you want <span>🍪</span></p>
+</footer>
