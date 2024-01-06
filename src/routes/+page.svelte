@@ -25,7 +25,7 @@
 <hr />
 <article id="takingaread">
   <section>
-    <h2>A little about myself</h2>
+    <h1>A little about myself</h1>
     <p>
       Hi! I'm Miguel Santos, a 17 year old Portuguese self-taught web developer.
       I work mainly with Svelte, used for this website, but I have some
@@ -58,7 +58,7 @@
   </section>
 
   <section>
-    <h3>What got me into coding</h3>
+    <h2>What got me into coding</h2>
     <p>
       I've always been keen on computers, my first electronic device was an
       android tablet when I was only 5-6 years old. I can't remember the exact
@@ -76,7 +76,7 @@
   </section>
 
   <section>
-    <h3>My personality</h3>
+    <h2>My personality</h2>
     <p>
       I'm a very casual person around those I meet, especially with friends,
       despite the initial interaction barrier being quite hard to break for me.
