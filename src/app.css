@@ -227,8 +227,7 @@ hr {
 }
 
 article {
-  padding: 0 2rem;
-  padding-bottom: 2rem;
+  padding: 0 2rem 2rem;
 
   margin-inline: auto;
 
