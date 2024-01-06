@@ -234,14 +234,6 @@ article {
   max-width: 75ch;
 }
 
-article section:not(:last-child) {
-  padding-bottom: 1rem;
-}
-
-article hr {
-  width: 100%;
-}
-
 article p {
   text-align: justify;
   line-height: 2rem;

@@ -57,8 +57,6 @@
     />
   </section>
 
-  <hr />
-
   <section>
     <h3>What got me into coding</h3>
     <p>
