@@ -228,6 +228,7 @@ hr {
 
 article {
   padding: 0 2rem;
+  padding-bottom: 2rem;
 
   margin-inline: auto;
 
@@ -235,7 +236,7 @@ article {
 }
 
 article section:not(:last-child) {
-  padding-bottom: 2rem;
+  padding-bottom: 1rem;
 }
 
 article hr {
