@@ -241,6 +241,7 @@ article {
 article p {
   text-align: justify;
   line-height: 2rem;
+  text-wrap: pretty;
 }
 
 article a {
