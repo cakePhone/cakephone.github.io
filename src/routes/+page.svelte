@@ -85,11 +85,10 @@
       I work mainly alone, but I'm open to team work.
     </p>
     <p>
-      I'm a very focused worker, doing everything I set my mind to. My biggest
-      flaw is that what makes me a great worker is what holds me back too, if I
-      simply set my mind to not do something, I won't do it. I do try to go
-      around it and push through my own lack of motivation for things I find
-      useless or without meaning.
+      I'm very focused on my work, doing everything I set my mind to. My biggest
+      flaw is exactly the same thing: if I simply set my mind to not do something,
+      I won't do it. I do try to go around it and push through my own lack of
+      motivation for things I find useless or without meaning.
     </p>
   </section>
 </article>
