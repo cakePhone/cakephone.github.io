@@ -102,6 +102,10 @@ body.change-colors {
   align-items: center;
 }
 
+#background svg {
+  position: absolute;
+}
+
 #bubble-container {
   z-index: -2;
   position: relative;
