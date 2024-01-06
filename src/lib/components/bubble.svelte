@@ -1,89 +1,104 @@
 <script lang="ts">
-  import {onMount} from "svelte";
-  import {windowWidth} from "$lib/stores";
+  import { onMount } from "svelte";
+  import { windowWidth } from "$lib/stores";
 
   export let color: string = "red";
   export let dissipate: boolean = false;
 
   let screenWidth: number;
-  windowWidth.subscribe((width) => {screenWidth = width})
+  windowWidth.subscribe((width) => {
+    screenWidth = width;
+  });
 
   let size: number = 320;
 
-  let x: number = randomSigned(300);
-  let y: number = randomSigned(300);
+  let x: number = randomSignedInRange(300);
+  let y: number = randomSignedInRange(300);
 
   let vx: number = 0;
   let vy: number = 0;
 
-  let limit: number = 160;
-  let vlimit: number = 3;
-  const speedModifier: number = 0.5
-  const reduceSpeedBy: number = 0.1;
+  let limit: number = size / 2;
+  let vlimit: number = 6;
+  const speedModifier: number = 1;
+  const reduceSpeedBy: number = 0.2;
 
-  const fps: number = 60;
+  const fps: number = 30;
   const interval = 1000 / fps;
+  let previousTimestamp = 0; // initialize the previous timestamp
 
-  function randomSigned(value: number) {
-    return (Math.random() - .5) * value * 2
+  function randomSignedInRange(value: number) {
+    return (Math.random() - 0.5) * value * 2;
   }
 
-  function updatePositions() {
-    vx += randomSigned(speedModifier)
-    vy += randomSigned(speedModifier)
+  function updatePositions(timestamp: number) {
+    let deltaTime = timestamp - previousTimestamp;
 
-    // check speed limits
-    if (vx > vlimit) vx -= 0.5
-    if (vy > vlimit) vy -= 0.5
-    if (vx < -vlimit) vx += 0.5
-    if (vy < -vlimit) vy += 0.5
+    if (deltaTime >= interval) {
+      vx += randomSignedInRange(speedModifier);
+      vy += randomSignedInRange(speedModifier);
 
-    if (!dissipate) {
-      limit = 160
-      if (Math.abs(x) <= limit || Math.abs(y) <= limit) vlimit = 3
+      // check speed limits
+      if (vx > vlimit) vx -= 1;
+      if (vy > vlimit) vy -= 1;
+      if (vx < -vlimit) vx += 1;
+      if (vy < -vlimit) vy += 1;
 
-      // reduce speed of bubbles off limits
-      if (x > limit) vx -= reduceSpeedBy
-      if (x < -limit) vx += reduceSpeedBy
-      if (y > limit) vy -= reduceSpeedBy
-      if (y < -limit) vy += reduceSpeedBy
-    } else {
-      limit = screenWidth / 2 + size * 2;
-      vlimit = 10
+      if (!dissipate) {
+        limit = size / 2;
+        if (Math.abs(x) <= limit || Math.abs(y) <= limit) vlimit = 6;
 
-      // increase speeds to reach limit
-      if (Math.abs(x) <= limit) vx *= 1.1
-      if (Math.abs(y) <= limit) vy *= 1.1
+        // reduce speed of bubbles off limits
+        if (x > limit) vx -= reduceSpeedBy;
+        if (x < -limit) vx += reduceSpeedBy;
+        if (y > limit) vy -= reduceSpeedBy;
+        if (y < -limit) vy += reduceSpeedBy;
+      } else {
+        limit = screenWidth;
+        vlimit = 20;
 
-      // outside of limit, stop
-      if (Math.abs(x) > limit) vx *= 0
-      if (Math.abs(y) > limit) vy *= 0
+        // increase speeds to fly outside screen
+        if (Math.abs(x) <= limit) vx *= 1.3;
+        if (Math.abs(y) <= limit) vy *= 1.3;
+
+        // outside of limit, stop
+        if (Math.abs(x) > limit) vx *= 0;
+        if (Math.abs(y) > limit) vy *= 0;
+      }
+
+      // update positions
+      x += vx;
+      y += vy;
+
+      previousTimestamp = timestamp;
     }
-
-    // update positions
-    x += vx
-    y += vy
   }
-
 
   function checkWidth() {
-    if(screenWidth < 900) size = 160
-    else size = 320
+    if (screenWidth < 900) size = 160;
+    else size = 320;
   }
 
-  function draw() {
-    checkWidth()
-    updatePositions()
+  function draw(timestamp: number) {
+    checkWidth();
+    updatePositions(timestamp);
+
+    window?.requestAnimationFrame(draw);
   }
 
   onMount(() => {
-    setInterval(() => {
-      window!.requestAnimationFrame(draw)
-    }, interval)
-  })
+    if (!window?.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      window?.requestAnimationFrame(draw);
+    }
+  });
 </script>
 
-<div class="bubble" class:dissipate={dissipate} style="--color: {color}; --x: {x - size/2}px; --y: {y - size/2}px; --size: {size}px"></div>
+<div
+  class="bubble"
+  class:dissipate
+  style="--color: {color}; --x: {x - size / 2}px; --y: {y -
+    size / 2}px; --size: {size}px"
+></div>
 
 <style>
   .bubble {
@@ -100,7 +115,7 @@
     border-radius: 100%;
     filter: blur(calc(var(--size) / 4));
 
-    transition: opacity 1s
+    transition: opacity 1s;
   }
 
   .dissipate {

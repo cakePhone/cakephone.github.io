@@ -1,21 +1,22 @@
 <script lang="ts">
   export let type: string;
   export let href: string = "";
-  export let method: Function = () => {}
+  export let method: Function = () => {};
 </script>
 
 {#if type === "anchor"}
-  <a href={href}>
-    <slot/>
+  <a {href}>
+    <slot />
   </a>
-  {:else if type === "button"}
+{:else if type === "button"}
   <button on:click={() => method()}>
-    <slot/>
+    <slot />
   </button>
 {/if}
 
 <style>
-  a, button {
+  a,
+  button {
     --border-radius: 0.5rem;
 
     position: relative;
@@ -30,7 +31,7 @@
     outline: none;
     text-decoration: none;
 
-    padding: 1rem 1rem .4rem;
+    padding: 1rem 1rem 0.4rem;
     border-radius: var(--border-radius);
 
     border-top: 3px solid #d2eaff;
@@ -41,7 +42,7 @@
 
   a::before,
   button::before {
-    content: '';
+    content: "";
     position: absolute;
 
     height: calc(100% + 8px);
@@ -66,7 +67,7 @@
   }
 
   a:active,
-  button:active{
+  button:active {
     top: 4px;
     box-shadow: 0 0 5px rgb(0 0 0 / 100);
   }
