@@ -1,1 +1,13 @@
-// place files you want to import through the `$lib` alias in this folder.
+export type project = {
+  title: string,
+  description: string,
+
+  href: string | null,
+  github: string | null,
+
+  image: string,
+
+  accent: string,
+  onAccent: string,
+  onSurface: string;
+}

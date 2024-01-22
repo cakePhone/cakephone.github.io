@@ -53,12 +53,6 @@ body {
   --ff-content: "Prata", serif;
   --fs-content: 1.2rem;
 
-  /* == screen sizes == */
-  --ss-phone: 600px; /* !! Use with max-width !! */
-  --ss-tablet-portrait: 900px;
-  --ss-tablet-landscape: 1200px;
-  --ss-desktop: 1800px;
-
   transition: all 1s;
 
   background-color: var(--surface);
@@ -301,7 +295,7 @@ footer p, footer a {
     --on-surface: #ffffff;
 
     --accent: #d06a85;
-    --surface: #27242d;
+    --surface: #000000;
   }
 }
 
@@ -359,7 +353,7 @@ footer p, footer a {
   }
 
   article {
-    padding: 0 2rem;
+    padding: 0 1rem;
     max-width: 100%;
   }
 

@@ -1,4 +1,6 @@
 <script lang="ts">
+  import Carousel from "$lib/components/carousel.svelte";
+
   let welcomeSpans: string[] = ["Welcome!", "I'm Miguel Santos."];
 </script>
 
@@ -27,8 +29,8 @@
   </div>
 </section>
 <hr />
-<article id="takingaread">
-  <section>
+<article>
+  <section id="takingaread">
     <h1>A little about myself</h1>
     <p>
       Hi! I'm Miguel Santos, a 17 year old Portuguese self-taught web developer.
@@ -92,5 +94,10 @@
       I won't do it. I do try to go around it and push through my own lack of
       motivation for things I find useless or without meaning.
     </p>
+  </section>
+
+  <section id="checkingmyprojects">
+    <h2>My Projects</h2>
+    <Carousel/>
   </section>
 </article>

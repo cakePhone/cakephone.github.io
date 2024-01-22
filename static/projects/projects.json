@@ -1,0 +1,28 @@
+[
+ {
+  "title": "OreoSearchPage",
+  "description": "A simplistic approach to a custom home page.",
+  
+  "href": "https://cakephone.github.io/OreoSearchPage",
+  "github": "https://github.com/cakephone/skymuse",
+
+  "image": "/projects/OreoSearchPage.png",
+
+  "accent": "#D3ACFF",
+  "on-accent": "#000",
+  "on-surface": "#ebdaff"
+ },
+ {
+  "title": "OreoSweeper",
+  "description": "Nostalgia hits when you least expect it! Here's my first Sveltekit Project: OreoSweeper",
+  
+  "href": "https://cakephone.github.io/OreoSweeper",
+  "github": "https://github.com/cakephone/skymuse",
+
+  "image": "/projects/OreoSweeper.jpg",
+
+  "accent": "#ACDAFF",
+  "onAccent": "#000000",
+  "onSurface": "#FFFFFF"
+ }
+]
