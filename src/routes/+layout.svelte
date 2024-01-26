@@ -46,7 +46,6 @@
   <div id="bubble-container">
     <Bubble color="#f2e2ba" {dissipate} />
     <Bubble color="#f2bac9" {dissipate} />
-    <Bubble color="#baf2d8" {dissipate} />
     <Bubble color="#ff99c8" {dissipate} />
   </div>
 </div>
@@ -57,5 +56,5 @@
 <hr>
 <footer>
   <p>&copy; Miguel Santos - 2024 | Made with love ❤️ | <a href="#top">Go back to top</a></p>
-  <p>This website doesn't use cookies, so take as many as you want <span>🍪</span></p>
+  <p>This website doesn't use cookies, so take as many as you want 🍪</p>
 </footer>

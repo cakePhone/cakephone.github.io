@@ -7,9 +7,10 @@
 <section id="landing">
   <h1 id="welcome">
     {#each welcomeSpans as welcomeText, index}
-      <span class="fade-pop-up-in" style="--delay: {index * 1.2}s"
-        >{welcomeText}</span
-      ><br />
+      <span class="fade-pop-up-in" style="--delay: {index * 1.2}s">
+        {welcomeText}
+      </span>
+      <br />
     {/each}
   </h1>
   <div class="fade-pop-up-in welcome__details" style="--delay: 2s;">
@@ -23,13 +24,18 @@
   <div class="fade-pop-up-in welcome__details" style="--delay: 2.5s;">
     <h2>Or try:</h2>
     <div>
-      <a href="#takingaread" class="id-anchor">takingaread</a>
       <a href="#checkingmyprojects" class="id-anchor">checking<wbr/>my<wbr/>projects</a>
+      <a href="#takingaread" class="id-anchor">taking<wbr/>a<wbr/>read</a>
     </div>
   </div>
 </section>
 <hr />
 <article>
+  <section id="checkingmyprojects">
+    <h1>My Projects</h1>
+    <Carousel/>
+  </section>
+
   <section id="takingaread">
     <h1>A little about myself</h1>
     <p>
@@ -94,10 +100,5 @@
       I won't do it. I do try to go around it and push through my own lack of
       motivation for things I find useless or without meaning.
     </p>
-  </section>
-
-  <section id="checkingmyprojects">
-    <h2>My Projects</h2>
-    <Carousel/>
   </section>
 </article>

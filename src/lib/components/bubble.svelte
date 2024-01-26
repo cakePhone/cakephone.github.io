@@ -19,12 +19,12 @@
   let vy: number = 0;
 
   let limit: number = size / 2;
-  let vlimit: number = 6;
-  const speedModifier: number = 1;
-  const reduceSpeedBy: number = 0.2;
+  let vlimit: number = 12;
+  const speedModifier: number = 2;
+  const reduceSpeedBy: number = 0.4;
 
-  const fps: number = 30;
-  const interval = 1000 / fps;
+  const calcsPerSecond: number = 15;
+  const interval = 1000 / calcsPerSecond;
   let previousTimestamp = 0; // initialize the previous timestamp
 
   function randomSignedInRange(value: number) {
@@ -39,27 +39,28 @@
       vy += randomSignedInRange(speedModifier);
 
       // check speed limits
-      if (vx > vlimit) vx -= 1;
-      if (vy > vlimit) vy -= 1;
-      if (vx < -vlimit) vx += 1;
-      if (vy < -vlimit) vy += 1;
+      if (vx > vlimit) vx -= 2;
+      if (vy > vlimit) vy -= 2;
+      if (vx < -vlimit) vx += 2;
+      if (vy < -vlimit) vy += 2;
 
       if (!dissipate) {
-        limit = size / 2;
-        if (Math.abs(x) <= limit || Math.abs(y) <= limit) vlimit = 6;
+        if(screenWidth < 900) limit = size / 4;
+        else limit = size / 2;
+        if (Math.abs(x) <= limit || Math.abs(y) <= limit) vlimit = 12;
 
-        // reduce speed of bubbles off limits
-        if (x > limit) vx -= reduceSpeedBy;
-        if (x < -limit) vx += reduceSpeedBy;
-        if (y > limit) vy -= reduceSpeedBy;
-        if (y < -limit) vy += reduceSpeedBy;
+        // get bubbles within limits
+        if (x > limit) vx -= reduceSpeedBy * 2;
+        if (x < -limit) vx += reduceSpeedBy * 2;
+        if (y > limit) vy -= reduceSpeedBy * 2;
+        if (y < -limit) vy += reduceSpeedBy * 2;
       } else {
         limit = screenWidth;
-        vlimit = 20;
+        vlimit = 40;
 
         // increase speeds to fly outside screen
-        if (Math.abs(x) <= limit) vx *= 1.3;
-        if (Math.abs(y) <= limit) vy *= 1.3;
+        if (Math.abs(x) <= limit) vx *= 1.6;
+        if (Math.abs(y) <= limit) vy *= 1.6;
 
         // outside of limit, stop
         if (Math.abs(x) > limit) vx *= 0;
@@ -96,8 +97,11 @@
 <div
   class="bubble"
   class:dissipate
-  style="--color: {color}; --x: {x - size / 2}px; --y: {y -
-    size / 2}px; --size: {size}px"
+  style="
+    --color: {color}; --x: {x - size / 2}px;
+    --y: {y - size / 2}px; --size: {size}px;
+    --transition: {interval}ms;
+  "
 ></div>
 
 <style>
@@ -115,7 +119,7 @@
     border-radius: 100%;
     filter: blur(calc(var(--size) / 4));
 
-    transition: opacity 1s;
+    transition: opacity 1s, top var(--transition) linear, left var(--transition) linear;
   }
 
   .dissipate {

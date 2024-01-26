@@ -9,19 +9,43 @@
   "image": "/projects/OreoSearchPage.png",
 
   "accent": "#D3ACFF",
-  "on-accent": "#000",
-  "on-surface": "#ebdaff"
+  "on-accent": "#000000",
+  "on-surface": "#EBDAFF"
  },
  {
   "title": "OreoSweeper",
   "description": "Nostalgia hits when you least expect it! Here's my first Sveltekit Project: OreoSweeper",
   
   "href": "https://cakephone.github.io/OreoSweeper",
-  "github": "https://github.com/cakephone/skymuse",
+  "github": "https://github.com/cakephone/OreoSweeper",
 
   "image": "/projects/OreoSweeper.jpg",
 
   "accent": "#ACDAFF",
+  "onAccent": "#000000",
+  "onSurface": "#FFFFFF"
+ },
+ {
+  "title": "SkyMuse",
+  "description": "A simple Android app using Capacitor.js, Svelte and Open-Meteo's weather API!",
+  
+  "github": "https://github.com/cakephone/skymuse",
+
+  "image": "/projects/SkyMuse.png",
+
+  "accent": "#FFA191",
+  "onAccent": "#000000",
+  "onSurface": "#FFFFFF"
+ },
+ {
+  "title": "Escola Secundária de Amarante",
+  "description": "The official website for the Highschool I studied at.",
+  
+  "href": "https://esamarante.edu.pt",
+
+  "image": "/projects/EscolaSecundariaAmarante.png",
+
+  "accent": "#61B8FF",
   "onAccent": "#000000",
   "onSurface": "#FFFFFF"
  }

@@ -53,6 +53,10 @@ body {
   --ff-content: "Prata", serif;
   --fs-content: 1.2rem;
 
+  /* == Sizing == */
+  --article-width: min(75ch, 100% - calc(var(--min-margin) * 2));
+  --min-margin: 2rem;
+
   transition: all 1s;
 
   background-color: var(--surface);
@@ -105,7 +109,7 @@ body.change-colors {
 #bubble-container {
   z-index: -2;
   position: relative;
-  margin-left: 60%;
+  margin-left: 70%;
   transition: all 1s;
 }
 
@@ -116,13 +120,14 @@ h4,
 h5,
 h6,
 a {
-  color: var(--on-surface-headings);
+  color: var(--accent);
   font-family: "Borel", cursive;
 }
 
 h1 {
   font-size: var(--fs-headings);
   margin-top: calc(var(--fs-headings) * 1.8);
+  margin-bottom: calc(var(--fs-headings) * -0.5);
 }
 h2 {
   font-size: calc(var(--fs-headings) / 1.2);
@@ -154,9 +159,9 @@ h6 {
   flex-direction: column;
   justify-content: center;
 
-  padding: 4rem;
-
   min-height: 100vh;
+
+  margin-inline: calc(var(--min-margin) * 2);
 }
 
 #landing h1 {
@@ -188,10 +193,12 @@ h6 {
 
   text-align: center;
   text-decoration: none;
+  color: var(--on-surface-headings);
 }
 
 .welcome__details h2 {
   margin: 0;
+  color: var(--accent);
 }
 
 .welcome__details a:after {
@@ -218,23 +225,22 @@ h6 {
 }
 
 hr {
-  width: calc(100% - 8rem);
+  width: var(--article-width);
+  
+  margin-block: var(--min-margin);
 
   border: none;
   border-top: 6px dotted var(--on-surface-headings);
 }
 
 article {
-  padding: 0 2rem 2rem;
-
   margin-inline: auto;
-
-  max-width: 75ch;
+  width: var(--article-width);
 }
 
 article p {
   text-align: justify;
-  line-height: 2rem;
+  line-height: calc(var(--fs-content) * 1.6);
   text-wrap: pretty;
 }
 
@@ -257,9 +263,9 @@ article img {
 }
 
 footer {
-  width: calc(100% - 4rem);
-  padding: 2rem;
+  width: var(--article-width);
   margin-inline: auto;
+  margin-block: var(--min-margin)
 }
 
 footer p, footer a {
@@ -326,38 +332,23 @@ footer p, footer a {
 
 @media only screen and (max-width: 900px) {
   #landing {
-    padding: 2rem;
+    margin: var(--min-margin);
+    gap: 2rem;
   }
 
   #bubble-container {
-    margin-inline: auto;
-  }
-
-  #bubble-container.bubbles-right {
     margin-left: auto;
+    margin-right: 10%;
   }
 
   .welcome__details {
-    margin-top: 1rem;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .welcome__details div {
     flex-direction: column;
     align-items: start;
-    gap: 1rem;
-  }
-
-  .welcome__details h2 {
-    margin-bottom: -1rem;
-  }
-
-  hr {
-    width: calc(100% - 2rem);
-  }
-
-  article {
-    padding: 0 1rem;
-    max-width: 100%;
-  }
-
-  footer {
-    padding: 1rem;
+    gap: 0;
   }
 }
