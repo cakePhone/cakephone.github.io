@@ -66,50 +66,11 @@ body {
 
 body.change-colors {
   --on-primary: #000000;
-  --on-surface-headings: #260e57;
+  --on-surface-headings: #54388d;
   --on-surface: #000000;
 
-  --accent: #ff1957;
+  --accent: #ff4c7c;
   --surface: #ddd4ff;
-}
-
-#background::before,
-#background::after {
-  position: fixed;
-  left: 0;
-  top: 0;
-  content: "";
-  width: 100vw;
-  height: 100vh;
-  z-index: -1;
-
-  opacity: 30%;
-}
-
-#background::before {
-  background-color: #000000;
-  filter: url(#noiseFilter);
-}
-
-#background {
-  position: fixed;
-  z-index: -1;
-
-  height: 100vh;
-  width: 100vw;
-
-  display: flex;
-  align-items: center;
-}
-
-#background svg {
-  position: absolute;
-}
-
-#bubble-container {
-  z-index: -2;
-  position: relative;
-  margin-left: 70%;
 }
 
 h1,
@@ -151,6 +112,114 @@ h5 {
 h6 {
   font-size: calc(var(--fs-headings) / 2);
   margin-bottom: calc(var(--fs-headings) / -2.2);
+}
+
+hr {
+  width: var(--article-width);
+
+  margin-block: var(--min-margin);
+
+  border: none;
+  border-top: 6px dotted var(--on-surface-headings);
+}
+
+article {
+  margin-inline: auto;
+  width: var(--article-width);
+}
+
+article p {
+  text-align: justify;
+  line-height: calc(var(--fs-content) * 1.6);
+  text-wrap: pretty;
+}
+
+article a {
+  font-family: var(--ff-content);
+  color: var(--accent);
+}
+
+article img {
+  display: block;
+  max-width: 100%;
+  max-height: 60rem;
+
+  width: 100%;
+
+  object-fit: cover;
+
+  border-radius: 0.5rem;
+  margin-block: 1rem;
+}
+
+progress {
+  height: .5rem;
+  width: 100%;
+  background: none;
+}
+
+progress::-webkit-progress-bar {
+  border-radius: 1rem;
+  background-color: white;
+}
+
+progress::-webkit-progress-value {
+  background-color: var(--on-surface-headings);
+  border-radius: 1rem;
+}
+
+progress::-moz-progress-bar {
+  border-radius: 1rem;
+}
+
+footer {
+  width: var(--article-width);
+  margin-inline: auto;
+  margin-block: var(--min-margin);
+}
+
+footer p,
+footer a {
+  margin: 1rem 0 0;
+}
+
+#background::before,
+#background::after {
+  position: fixed;
+  left: 0;
+  top: 0;
+  content: "";
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+
+  opacity: 30%;
+}
+
+#background::before {
+  background-color: #000000;
+  filter: url(#noiseFilter);
+}
+
+#background {
+  position: fixed;
+  z-index: -1;
+
+  height: 100vh;
+  width: 100vw;
+
+  display: flex;
+  align-items: center;
+}
+
+#background svg {
+  position: absolute;
+}
+
+#bubble-container {
+  z-index: -2;
+  position: relative;
+  margin-left: 70%;
 }
 
 #landing {
@@ -225,52 +294,44 @@ h6 {
   content: "#";
 }
 
-hr {
-  width: var(--article-width);
+.flex {
+  display: flex;
+  gap: 1rem;
+}
+
+.card {
+  width: fit-content;
+
+  padding: 1rem;
+
+  border-radius: .5rem;
   
-  margin-block: var(--min-margin);
-
-  border: none;
-  border-top: 6px dotted var(--on-surface-headings);
+  background: var(--surface);
 }
 
-article {
-  margin-inline: auto;
-  width: var(--article-width);
+.card img {
+  margin: 0;
+  aspect-ratio: 1;
+  max-width: 150px;
 }
 
-article p {
-  text-align: justify;
-  line-height: calc(var(--fs-content) * 1.6);
-  text-wrap: pretty;
+.card p {
+  text-align: left;
+  margin-bottom: 0;
 }
 
-article a {
-  font-family: var(--ff-content);
-  color: var(--accent);
+.card :is(h1, h2, h3, h4, h5, h6) {
+  margin-top: 0;
 }
 
-article img {
-  display: block;
-  max-width: 100%;
-  max-height: 60rem;
+.card h5 {
+  margin-top: 1rem;
+}
 
+.card hr {
   width: 100%;
-
-  object-fit: cover;
-
-  border-radius: 0.5rem;
-  margin-block: 1rem;
-}
-
-footer {
-  width: var(--article-width);
-  margin-inline: auto;
-  margin-block: var(--min-margin)
-}
-
-footer p, footer a {
-  margin: 1rem 0 0;
+  margin-top: 1rem;
+  margin-bottom: .5rem;
 }
 
 /* == Animations == */
@@ -290,7 +351,7 @@ footer p, footer a {
 
   to {
     opacity: 1;
-    transform: translateY(0)
+    transform: translateY(0);
   }
 }
 
@@ -303,6 +364,10 @@ footer p, footer a {
 
     --accent: #d06a85;
     --surface: #000000;
+  }
+
+  progress::-webkit-progress-bar {
+    background-color: #333;
   }
 }
 
@@ -327,7 +392,17 @@ footer p, footer a {
 
 @media only screen and (min-width: 900px) {
   body {
-    --fs-headings: 3rem;
+    --fs-headings: 2.5rem;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .card img {
+    max-width: 100%;
+  }
+
+  .card .flex {
+    flex-direction: column;
   }
 }
 
