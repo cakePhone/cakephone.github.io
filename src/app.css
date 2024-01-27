@@ -155,7 +155,12 @@ article img {
 progress {
   height: .5rem;
   width: 100%;
-  background: none;
+
+  border-radius: 1rem;
+
+  border: none;
+  outline: none;
+  background-color: white;
 }
 
 progress::-webkit-progress-bar {
@@ -170,6 +175,7 @@ progress::-webkit-progress-value {
 
 progress::-moz-progress-bar {
   border-radius: 1rem;
+  background-color: var(--on-surface-headings);
 }
 
 footer {
@@ -364,6 +370,10 @@ footer a {
 
     --accent: #d06a85;
     --surface: #000000;
+  }
+
+  progress {
+    background-color: #333;
   }
 
   progress::-webkit-progress-bar {
