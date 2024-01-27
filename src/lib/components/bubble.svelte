@@ -49,78 +49,78 @@
   @keyframes bubble-float-1 {
     0% {
       transform: translate(
-        calc(var(--max-pos-deviation) * cos(0deg) - var(--size) / 2),
-        calc(var(--max-pos-deviation) * sin(0deg) - var(--size) / 2)
+        calc(var(--max-pos-deviation) * cos(0deg)),
+        calc(var(--max-pos-deviation) * sin(0deg))
         );
     }
 
     10% {
       transform: translate(
-        calc(var(--max-pos-deviation) * cos(36deg) - var(--size) / 2),
-        calc(var(--max-pos-deviation) * sin(36deg) - var(--size) / 2)
+        calc(var(--max-pos-deviation) * cos(36deg)),
+        calc(var(--max-pos-deviation) * sin(36deg))
         );
     }
 
     20% {
       transform: translate(
-        calc(var(--max-pos-deviation) * cos(72deg) - var(--size) / 2),
-        calc(var(--max-pos-deviation) * sin(72deg) - var(--size) / 2)
+        calc(var(--max-pos-deviation) * cos(72deg)),
+        calc(var(--max-pos-deviation) * sin(72deg))
         );
     }
 
     30% {
       transform: translate(
-        calc(var(--max-pos-deviation) * cos(108deg) - var(--size) / 2),
-        calc(var(--max-pos-deviation) * sin(108deg) - var(--size) / 2)
+        calc(var(--max-pos-deviation) * cos(108deg)),
+        calc(var(--max-pos-deviation) * sin(108deg))
         );
     }
 
     40% {
       transform: translate(
-        calc(var(--max-pos-deviation) * cos(144deg) - var(--size) / 2),
-        calc(var(--max-pos-deviation) * sin(144deg) - var(--size) / 2)
+        calc(var(--max-pos-deviation) * cos(144deg)),
+        calc(var(--max-pos-deviation) * sin(144deg))
         );
     }
 
     50% {
       transform: translate(
-        calc(var(--max-pos-deviation) * cos(180deg) - var(--size) / 2),
-        calc(var(--max-pos-deviation) * sin(180deg) - var(--size) / 2)
+        calc(var(--max-pos-deviation) * cos(180deg)),
+        calc(var(--max-pos-deviation) * sin(180deg))
         );
     }
     
     60% {
       transform: translate(
-        calc(var(--max-pos-deviation) * cos(-144deg) - var(--size) / 2),
-        calc(var(--max-pos-deviation) * sin(-144deg) - var(--size) / 2)
+        calc(var(--max-pos-deviation) * cos(-144deg)),
+        calc(var(--max-pos-deviation) * sin(-144deg))
         );
     }
 
     70% {
       transform: translate(
-        calc(var(--max-pos-deviation) * cos(-108deg) - var(--size) / 2),
-        calc(var(--max-pos-deviation) * sin(-108deg) - var(--size) / 2)
+        calc(var(--max-pos-deviation) * cos(-108deg)),
+        calc(var(--max-pos-deviation) * sin(-108deg))
         );
     }
     
     80% {
       transform: translate(
-        calc(var(--max-pos-deviation) * cos(-72deg) - var(--size) / 2),
-        calc(var(--max-pos-deviation) * sin(-72deg) - var(--size) / 2)
+        calc(var(--max-pos-deviation) * cos(-72deg)),
+        calc(var(--max-pos-deviation) * sin(-72deg))
         );
     }
 
     90% {
       transform: translate(
-        calc(var(--max-pos-deviation) * cos(-36deg) - var(--size) / 2),
-        calc(var(--max-pos-deviation) * sin(-36deg) - var(--size) / 2)
+        calc(var(--max-pos-deviation) * cos(-36deg)),
+        calc(var(--max-pos-deviation) * sin(-36deg))
         );
     }
 
     100% {
       transform: translate(
-        calc(var(--max-pos-deviation) * cos(0deg) - var(--size) / 2),
-        calc(var(--max-pos-deviation) * sin(0deg) - var(--size) / 2)
+        calc(var(--max-pos-deviation) * cos(0deg)),
+        calc(var(--max-pos-deviation) * sin(0deg))
         );
     }
   }
@@ -128,29 +128,29 @@
   @keyframes bubble-float-2 {
     0% {
       transform: translate(
-        calc(var(--max-pos-deviation) * cos(0deg) - var(--size) / 2),
-        calc(var(--max-pos-deviation) * sin(0deg) - var(--size) / 2)
+        calc(var(--max-pos-deviation) * cos(0deg)),
+        calc(var(--max-pos-deviation) * sin(0deg))
         );
     }
 
     33% {
       transform: translate(
-        calc(var(--max-pos-deviation) * cos(120deg) - var(--size) / 2),
-        calc(var(--max-pos-deviation) * sin(120deg) - var(--size) / 2)
+        calc(var(--max-pos-deviation) * cos(120deg)),
+        calc(var(--max-pos-deviation) * sin(120deg))
         );
     }
 
     66% {
       transform: translate(
-        calc(var(--max-pos-deviation) * cos(240deg) - var(--size) / 2),
-        calc(var(--max-pos-deviation) * sin(240deg) - var(--size) / 2)
+        calc(var(--max-pos-deviation) * cos(240deg)),
+        calc(var(--max-pos-deviation) * sin(240deg))
         );
     }
 
     100% {
       transform: translate(
-        calc(var(--max-pos-deviation) * cos(0deg) - var(--size) / 2),
-        calc(var(--max-pos-deviation) * sin(0deg) - var(--size) / 2)
+        calc(var(--max-pos-deviation) * cos(0deg)),
+        calc(var(--max-pos-deviation) * sin(0deg))
         );
     }
   }
@@ -159,36 +159,36 @@
   @keyframes bubble-float-3 {
     0% {
       transform: translate(
-        calc(var(--max-pos-deviation) * cos(0deg) - var(--size) / 2),
-        calc(var(--max-pos-deviation) * sin(0deg) - var(--size) / 2)
+        calc(var(--max-pos-deviation) * cos(0deg)),
+        calc(var(--max-pos-deviation) * sin(0deg))
         );
     }
 
     25% {
       transform: translate(
-        calc(var(--max-pos-deviation) * cos(90deg) - var(--size) / 2),
-        calc(var(--max-pos-deviation) * sin(90deg) - var(--size) / 2)
+        calc(var(--max-pos-deviation) * cos(90deg)),
+        calc(var(--max-pos-deviation) * sin(90deg))
         );
     }
 
     50% {
       transform: translate(
-        calc(var(--max-pos-deviation) * cos(180deg) - var(--size) / 2),
-        calc(var(--max-pos-deviation) * sin(180deg) - var(--size) / 2)
+        calc(var(--max-pos-deviation) * cos(180deg)),
+        calc(var(--max-pos-deviation) * sin(180deg))
         );
     }
 
     75% {
       transform: translate(
-        calc(var(--max-pos-deviation) * cos(270deg) - var(--size) / 2),
-        calc(var(--max-pos-deviation) * sin(270deg) - var(--size) / 2)
+        calc(var(--max-pos-deviation) * cos(270deg)),
+        calc(var(--max-pos-deviation) * sin(270deg))
         );
     }
 
     100% {
       transform: translate(
-        calc(var(--max-pos-deviation) * cos(0deg) - var(--size) / 2),
-        calc(var(--max-pos-deviation) * sin(0deg) - var(--size) / 2)
+        calc(var(--max-pos-deviation) * cos(0deg)),
+        calc(var(--max-pos-deviation) * sin(0deg))
         );
     }
   }
