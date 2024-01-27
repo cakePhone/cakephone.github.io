@@ -1,31 +1,34 @@
 <script lang="ts">
   import Carousel from "$lib/components/carousel.svelte";
 
-  let welcomeSpans: string[] = ["Welcome!", "I'm Miguel Santos."];
+  let welcomeSpans: string[] = ["Welcome!", "I'm Miguel Santos.", "a Web Developer", "and Designer"];
 </script>
 
 <section id="landing">
   <h1 id="welcome">
     {#each welcomeSpans as welcomeText, index}
-      <span class="fade-pop-up-in" style="--delay: {index * 1.2}s">
+      <span class="fade-pop-up-in" style="--delay: {index}s">
         {welcomeText}
       </span>
       <br />
     {/each}
   </h1>
-  <div class="fade-pop-up-in welcome__details" style="--delay: 2s;">
+  <div class="fade-pop-up-in welcome__details" style="--delay: 4s;">
     <h2>Contact me:</h2>
     <div>
       <a href="mailto:miguelandrelealsantos.business@gmail.com">-Gmail-</a>
       <a href="https://github.com/cakePhone">-Github-</a>
       <a href="https://www.instagram.com/cakephoneig">-Intagram-</a>
+      <a href="https://www.linkedin.com/in/miguel-andr%C3%A9-leal-santos-a2b3282b1/">-LinkedIn-</a>
     </div>
   </div>
-  <div class="fade-pop-up-in welcome__details" style="--delay: 2.5s;">
+  <div class="fade-pop-up-in welcome__details" style="--delay: 4.5s;">
     <h2>Or try:</h2>
     <div>
-      <a href="#checkingmyprojects" class="id-anchor">checking<wbr/>my<wbr/>projects</a>
-      <a href="#takingaread" class="id-anchor">taking<wbr/>a<wbr/>read</a>
+      <a href="#checkingmyprojects" class="id-anchor"
+        >checking<wbr />my<wbr />projects</a
+      >
+      <a href="#takingaread" class="id-anchor">taking<wbr />a<wbr />read</a>
     </div>
   </div>
 </section>
@@ -33,11 +36,44 @@
 <article>
   <section id="checkingmyprojects">
     <h1>My Projects</h1>
-    <Carousel/>
+    <Carousel />
   </section>
 
   <section id="takingaread">
-    <h1>A little about myself</h1>
+    <h1>Who am I?</h1>
+    <div class="card">
+      <div class="flex">
+        <img
+          id="pfp"
+          src="/about-myself/pfp.jpg"
+          alt="Miguel wearing a shirt and bowtie"
+        />
+        <div>
+          <h3>Miguel Santos</h3>
+          <hr/>
+          <p>Junior Frontend and Backend Developer</p>
+        </div>
+      </div>
+      <hr/>
+      <h5>HTML5/CSS/JS</h5>
+      <progress value="1"/>
+
+      <h5>Sveltekit</h5>
+      <progress value="0.8"/>
+
+      <h5>Vue</h5>
+      <progress value="0.5"/>
+
+      <hr/>
+
+      <h5>C</h5>
+      <progress value=".8"/>
+
+      <h5>Rust</h5>
+      <progress value=".4"/>
+    </div>
+
+    <h2>A little about myself</h2>
     <p>
       Hi! I'm Miguel Santos, a 17 year old Portuguese self-taught web developer.
       I work mainly with Svelte, used for this website, but I have some
@@ -96,9 +132,9 @@
     </p>
     <p>
       I'm very focused on my work, doing everything I set my mind to. My biggest
-      flaw is exactly the same thing: if I simply set my mind to not do something,
-      I won't do it. I do try to go around it and push through my own lack of
-      motivation for things I find useless or without meaning.
+      flaw is exactly the same thing: if I simply set my mind to not do
+      something, I won't do it. I do try to go around it and push through my own
+      lack of motivation for things I find useless or without meaning.
     </p>
   </section>
 </article>
