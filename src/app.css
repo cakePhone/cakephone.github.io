@@ -110,7 +110,6 @@ body.change-colors {
   z-index: -2;
   position: relative;
   margin-left: 70%;
-  transition: all 1s;
 }
 
 h1,
