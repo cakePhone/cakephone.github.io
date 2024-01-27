@@ -1,115 +1,23 @@
 <script lang="ts">
-  import { onMount } from "svelte";
-  import { windowWidth } from "$lib/stores";
-
   export let color: string = "red";
   export let dissipate: boolean = false;
-
-  let screenWidth: number;
-  windowWidth.subscribe((width) => {
-    screenWidth = width;
-  });
-
-  let size: number = 320;
-
-  let x: number = randomSignedInRange(300);
-  let y: number = randomSignedInRange(300);
-
-  let vx: number = 0;
-  let vy: number = 0;
-
-  let limit: number = size / 2;
-  let vlimit: number = 12;
-  const speedModifier: number = 2;
-  const reduceSpeedBy: number = 0.4;
-
-  const calcsPerSecond: number = 15;
-  const interval = 1000 / calcsPerSecond;
-  let previousTimestamp = 0; // initialize the previous timestamp
-
-  function randomSignedInRange(value: number) {
-    return (Math.random() - 0.5) * value * 2;
-  }
-
-  function updatePositions(timestamp: number) {
-    let deltaTime = timestamp - previousTimestamp;
-
-    if (deltaTime >= interval) {
-      vx += randomSignedInRange(speedModifier);
-      vy += randomSignedInRange(speedModifier);
-
-      // check speed limits
-      if (vx > vlimit) vx -= 2;
-      if (vy > vlimit) vy -= 2;
-      if (vx < -vlimit) vx += 2;
-      if (vy < -vlimit) vy += 2;
-
-      if (!dissipate) {
-        if(screenWidth < 900) limit = size / 4;
-        else limit = size / 2;
-        if (Math.abs(x) <= limit || Math.abs(y) <= limit) vlimit = 12;
-
-        // get bubbles within limits
-        if (x > limit) vx -= reduceSpeedBy * 2;
-        if (x < -limit) vx += reduceSpeedBy * 2;
-        if (y > limit) vy -= reduceSpeedBy * 2;
-        if (y < -limit) vy += reduceSpeedBy * 2;
-      } else {
-        limit = screenWidth;
-        vlimit = 40;
-
-        // increase speeds to fly outside screen
-        if (Math.abs(x) <= limit) vx *= 1.6;
-        if (Math.abs(y) <= limit) vy *= 1.6;
-
-        // outside of limit, stop
-        if (Math.abs(x) > limit) vx *= 0;
-        if (Math.abs(y) > limit) vy *= 0;
-      }
-
-      // update positions
-      x += vx;
-      y += vy;
-
-      previousTimestamp = timestamp;
-    }
-  }
-
-  function checkWidth() {
-    if (screenWidth < 900) size = 160;
-    else size = 320;
-  }
-
-  function draw(timestamp: number) {
-    checkWidth();
-    updatePositions(timestamp);
-
-    window?.requestAnimationFrame(draw);
-  }
-
-  onMount(() => {
-    if (!window?.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      window?.requestAnimationFrame(draw);
-    }
-  });
 </script>
 
 <div
   class="bubble"
   class:dissipate
-  style="
-    --color: {color}; --x: {x - size / 2}px;
-    --y: {y - size / 2}px; --size: {size}px;
-    --transition: {interval}ms;
-  "
+  style="--color: {color};"
 ></div>
 
 <style>
   .bubble {
+    --max-pos-deviation: 150px;
+    --size: 300px;
+
     position: absolute;
 
-    top: var(--x);
-    left: var(--y);
+    top: calc(var(--max-pos-deviation) * sin(0deg) - var(--size) / 2);
+    left: calc(var(--max-pos-deviation) * cos(0deg) - var(--size) / 2);
 
     height: var(--size);
     width: var(--size);
@@ -119,10 +27,129 @@
     border-radius: 100%;
     filter: blur(calc(var(--size) / 4));
 
-    transition: opacity 1s, top var(--transition) linear, left var(--transition) linear;
+    transition: all 1s;
+  }
+
+  .bubble:nth-child(1) {
+    animation: bubble-float-1 10s linear infinite;
+  }
+
+  .bubble:nth-child(2) {
+    animation: bubble-float-2 8s linear infinite;
+  }
+
+  .bubble:nth-child(3) {
+    animation: bubble-float-3 15s linear infinite;
   }
 
   .dissipate {
     opacity: 0;
+  }
+
+  @keyframes bubble-float-1 {
+    0% {
+      top: calc(var(--max-pos-deviation) * sin(0deg) - var(--size) / 2);
+      left: calc(var(--max-pos-deviation) * cos(0deg) - var(--size) / 2);
+    }
+
+    10% {
+      top: calc(var(--max-pos-deviation) * sin(36deg) - var(--size) / 2);
+      left: calc(var(--max-pos-deviation) * cos(36deg) - var(--size) / 2)
+    }
+
+    20% {
+      top: calc(var(--max-pos-deviation) * sin(72deg) - var(--size) / 2);
+      left: calc(var(--max-pos-deviation) * cos(72deg) - var(--size) / 2)
+    }
+
+    30% {
+      top: calc(var(--max-pos-deviation) * sin(108deg) - var(--size) / 2);
+      left: calc(var(--max-pos-deviation) * cos(108deg) - var(--size) / 2)
+    }
+
+    40% {
+      top: calc(var(--max-pos-deviation) * sin(144deg) - var(--size) / 2);
+      left: calc(var(--max-pos-deviation) * cos(144deg) - var(--size) / 2)
+    }
+
+    50% {
+      top: calc(var(--max-pos-deviation) * sin(180deg) - var(--size) / 2);
+      left: calc(var(--max-pos-deviation) * cos(180deg) - var(--size) / 2)
+    }
+    
+    60% {
+      top: calc(var(--max-pos-deviation) * sin(-144deg) - var(--size) / 2);
+      left: calc(var(--max-pos-deviation) * cos(-144deg) - var(--size) / 2)
+    }
+
+    70% {
+      top: calc(var(--max-pos-deviation) * sin(-108deg) - var(--size) / 2);
+      left: calc(var(--max-pos-deviation) * cos(-108deg) - var(--size) / 2)
+    }
+    
+    80% {
+      top: calc(var(--max-pos-deviation) * sin(-72deg) - var(--size) / 2);
+      left: calc(var(--max-pos-deviation) * cos(-72deg) - var(--size) / 2)
+    }
+
+    90% {
+      top: calc(var(--max-pos-deviation) * sin(-36deg) - var(--size) / 2);
+      left: calc(var(--max-pos-deviation) * cos(-36deg) - var(--size) / 2)
+    }
+
+    100% {
+      top: calc(var(--max-pos-deviation) * sin(360deg) - var(--size) / 2);
+      left: calc(var(--max-pos-deviation) * cos(360deg) - var(--size) / 2)
+    }
+  }
+
+  @keyframes bubble-float-2 {
+    0% {
+      top: calc(var(--max-pos-deviation) * sin(0deg) - var(--size) / 2);
+      left: calc(var(--max-pos-deviation) * cos(0deg) - var(--size) / 2)
+    }
+
+    33% {
+      top: calc(var(--max-pos-deviation) * sin(120deg) - var(--size) / 2);
+      left: calc(var(--max-pos-deviation) * cos(120deg) - var(--size) / 2)
+    }
+
+    66% {
+      top: calc(var(--max-pos-deviation) * sin(240deg) - var(--size) / 2);
+      left: calc(var(--max-pos-deviation) * cos(240deg) - var(--size) / 2)
+    }
+
+    100% {
+      top: calc(var(--max-pos-deviation) * sin(0deg) - var(--size) / 2);
+      left: calc(var(--max-pos-deviation) * cos(0deg) - var(--size) / 2)
+    }
+  }
+
+
+  @keyframes bubble-float-3 {
+    0% {
+      top: calc(var(--max-pos-deviation) * sin(0deg) - var(--size) / 2);
+      left: calc(var(--max-pos-deviation) * cos(0deg) - var(--size) / 2)
+    }
+
+    25% {
+      top: calc(var(--max-pos-deviation) * sin(90deg) - var(--size) / 2);
+      left: calc(var(--max-pos-deviation) * cos(90deg) - var(--size) / 2)
+    }
+
+    50% {
+      top: calc(var(--max-pos-deviation) * sin(180deg) - var(--size) / 2);
+      left: calc(var(--max-pos-deviation) * cos(180deg) - var(--size) / 2)
+    }
+
+    75% {
+      top: calc(var(--max-pos-deviation) * sin(270deg) - var(--size) / 2);
+      left: calc(var(--max-pos-deviation) * cos(270deg) - var(--size) / 2)
+    }
+
+    100% {
+      top: calc(var(--max-pos-deviation) * sin(0deg) - var(--size) / 2);
+      left: calc(var(--max-pos-deviation) * cos(0deg) - var(--size) / 2)
+    }
   }
 </style>

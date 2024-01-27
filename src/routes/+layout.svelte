@@ -14,7 +14,7 @@
   let dissipate: boolean = false;
 
   $: updateWindowWidth(updatedWindowWidth);
-  $: dissipate = scroll > height * 0.4;
+  $: dissipate = scroll > height * 0.6;
 </script>
 
 <svelte:window
@@ -44,9 +44,9 @@
     </filter>
   </svg>
   <div id="bubble-container">
-    <Bubble color="#f2e2ba" {dissipate} />
-    <Bubble color="#f2bac9" {dissipate} />
-    <Bubble color="#ff99c8" {dissipate} />
+    <Bubble color="var(--accent)" {dissipate} />
+    <Bubble color="#dbe2ff" {dissipate} />
+    <Bubble color="#62fc83" {dissipate} />
   </div>
 </div>
 
