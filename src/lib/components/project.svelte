@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { onMount } from "svelte";
+  import { onMount } from "svelte";
 
   export let title: string = "";
   export let description: string = "";
@@ -15,7 +15,8 @@
 </script>
 
 <div
-  id="main" style="--image: url({image}); --project-accent: {accent}; --on-project-accent: {onAccent}; --on-project-surface: {onSurface};"
+  id="main"
+  style="--image: url({image}); --project-accent: {accent}; --on-project-accent: {onAccent}; --on-project-surface: {onSurface};"
 >
   <div id="gradient-background">
     <h3>{title}</h3>
@@ -23,13 +24,27 @@
     <div id="links">
       {#if href}
         <a class="visit" {href} target="_blank">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill="currentColor" d="M4.75 3.5c-.69 0-1.25.56-1.25 1.25v6.5c0 .69.56 1.25 1.25 1.25h6.5c.69 0 1.25-.56 1.25-1.25v-1.5a.75.75 0 0 1 1.5 0v1.5A2.75 2.75 0 0 1 11.25 14h-6.5A2.75 2.75 0 0 1 2 11.25v-6.5A2.75 2.75 0 0 1 4.75 2h1.5a.75.75 0 0 1 0 1.5zM8 2.75A.75.75 0 0 1 8.75 2h4.5a.75.75 0 0 1 .75.75v4.5a.75.75 0 0 1-1.5 0V4.561l-3.22 3.22A.75.75 0 1 1 8.22 6.72l3.22-3.22H8.75A.75.75 0 0 1 8 2.75"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"
+            ><path
+              fill="currentColor"
+              d="M4.75 3.5c-.69 0-1.25.56-1.25 1.25v6.5c0 .69.56 1.25 1.25 1.25h6.5c.69 0 1.25-.56 1.25-1.25v-1.5a.75.75 0 0 1 1.5 0v1.5A2.75 2.75 0 0 1 11.25 14h-6.5A2.75 2.75 0 0 1 2 11.25v-6.5A2.75 2.75 0 0 1 4.75 2h1.5a.75.75 0 0 1 0 1.5zM8 2.75A.75.75 0 0 1 8.75 2h4.5a.75.75 0 0 1 .75.75v4.5a.75.75 0 0 1-1.5 0V4.561l-3.22 3.22A.75.75 0 1 1 8.22 6.72l3.22-3.22H8.75A.75.75 0 0 1 8 2.75"
+            /></svg
+          >
           Visit
         </a>
       {/if}
       {#if github}
         <a class="github" href={github} target="_blank">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5.75 14.25s-.5-2 .5-3c0 0-2 0-3.5-1.5s-1-4.5 0-5.5c-.5-1.5.5-2.5.5-2.5s1.5 0 2.5 1c1-.5 3.5-.5 4.5 0c1-1 2.5-1 2.5-1s1 1 .5 2.5c1 1 1.5 4 0 5.5s-3.5 1.5-3.5 1.5c1 1 .5 3 .5 3m-5-.5c-1.5.5-3-.5-3.5-1"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"
+            ><path
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+              d="M5.75 14.25s-.5-2 .5-3c0 0-2 0-3.5-1.5s-1-4.5 0-5.5c-.5-1.5.5-2.5.5-2.5s1.5 0 2.5 1c1-.5 3.5-.5 4.5 0c1-1 2.5-1 2.5-1s1 1 .5 2.5c1 1 1.5 4 0 5.5s-3.5 1.5-3.5 1.5c1 1 .5 3 .5 3m-5-.5c-1.5.5-3-.5-3.5-1"
+            /></svg
+          >
           Github
         </a>
       {/if}
@@ -52,7 +67,8 @@
     line-height: normal;
   }
 
-  a, a.visit.visit {
+  a,
+  a.visit.visit {
     text-decoration: none;
     color: var(--on-project-accent);
 
@@ -116,19 +132,20 @@
 
   #links {
     display: flex;
-    gap: 1rem
+    gap: 1rem;
   }
 
   @media only screen and (max-width: 600px) {
     #gradient-background {
-      padding: .5rem;
+      padding: 0.5rem;
     }
 
     #links {
-      gap: .5rem;
+      gap: 0.5rem;
     }
 
-    a, a.visit.visit {
+    a,
+    a.visit.visit {
       font-size: 0.8rem;
 
       padding: 0.6rem 1rem 0;

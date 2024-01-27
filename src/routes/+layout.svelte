@@ -10,10 +10,7 @@
   $: dissipate = scroll > height * 0.6;
 </script>
 
-<svelte:window
-  bind:innerHeight={height}
-  bind:scrollY={scroll}
-/>
+<svelte:window bind:innerHeight={height} bind:scrollY={scroll} />
 {#if height * 0.6 < scroll}
   <Body class="change-colors" />
 {/if}
@@ -45,8 +42,12 @@
 <main id="top">
   <slot />
 </main>
-<hr>
+<hr />
 <footer>
-  <p>&copy; Miguel Santos - 2024 | Made with love ❤️ | <a href="#top">Go back to top</a></p>
+  <p>
+    &copy; Miguel Santos - 2024 | Made with love ❤️ | <a href="#top"
+      >Go back to top</a
+    >
+  </p>
   <p>This website doesn't use cookies, so take as many as you want 🍪</p>
 </footer>

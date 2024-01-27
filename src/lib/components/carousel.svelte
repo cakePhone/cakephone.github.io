@@ -19,8 +19,8 @@
   function scrollToIndex(index: number) {
     carousel.scrollTo({
       left: index * width,
-      behavior: "smooth"
-    })
+      behavior: "smooth",
+    });
   }
 
   onMount(async () => {
@@ -32,31 +32,32 @@
       } else {
         if (currentShowingIndex < projectsJson.length - 1) {
           currentShowingIndex++;
-        }
-        else {
+        } else {
           currentShowingIndex = 0;
         }
 
         scrollToIndex(currentShowingIndex);
       }
-    }, 6000)
-  })
+    }, 6000);
+  });
 
-  $: currentShowingIndex = Math.round(carouselScroll/width);
+  $: currentShowingIndex = Math.round(carouselScroll / width);
 </script>
 
-<section bind:this={carousel} bind:clientWidth={width} on:scroll={defineCarouselScroll} id="carousel">
+<section
+  bind:this={carousel}
+  bind:clientWidth={width}
+  on:scroll={defineCarouselScroll}
+  id="carousel"
+>
   {#if projectsJson.length !== 0}
     {#each projectsJson as project}
       <Project
         title={project.title}
         description={project.description}
-
         href={project.href}
         github={project.github}
-
         image={project.image}
-
         accent={project.accent}
         onAccent={project.onAccent}
         onSurface={project.onSurface}
@@ -72,7 +73,10 @@
       class="carousel__page-indicators__indicator"
       class:current={currentShowingIndex === index}
       data-looping={!hasInteracted}
-      on:click={() => {scrollToIndex(index); hasInteracted = true}}
+      on:click={() => {
+        scrollToIndex(index);
+        hasInteracted = true;
+      }}
     ></div>
   {/each}
 </div>
@@ -129,7 +133,7 @@
   }
 
   .carousel__page-indicators__indicator::after {
-    content: '';
+    content: "";
 
     position: absolute;
     top: 0;
@@ -156,6 +160,8 @@
   .current::after {
     width: 100%;
     opacity: 1;
-    transition: all 5.5s linear, opacity .5s linear;
+    transition:
+      all 5.5s linear,
+      opacity 0.5s linear;
   }
 </style>

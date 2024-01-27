@@ -1,52 +1,52 @@
 [
- {
-  "title": "OreoSearchPage",
-  "description": "A simplistic approach to a custom home page.",
-  
-  "href": "https://cakephone.github.io/OreoSearchPage",
-  "github": "https://github.com/cakephone/skymuse",
+  {
+    "title": "OreoSearchPage",
+    "description": "A simplistic approach to a custom home page.",
 
-  "image": "/projects/OreoSearchPage.png",
+    "href": "https://cakephone.github.io/OreoSearchPage",
+    "github": "https://github.com/cakephone/skymuse",
 
-  "accent": "#D3ACFF",
-  "on-accent": "#000000",
-  "on-surface": "#EBDAFF"
- },
- {
-  "title": "OreoSweeper",
-  "description": "Nostalgia hits when you least expect it! Here's my first Sveltekit Project: OreoSweeper",
-  
-  "href": "https://cakephone.github.io/OreoSweeper",
-  "github": "https://github.com/cakephone/OreoSweeper",
+    "image": "/projects/OreoSearchPage.png",
 
-  "image": "/projects/OreoSweeper.jpg",
+    "accent": "#D3ACFF",
+    "on-accent": "#000000",
+    "on-surface": "#EBDAFF"
+  },
+  {
+    "title": "OreoSweeper",
+    "description": "Nostalgia hits when you least expect it! Here's my first Sveltekit Project: OreoSweeper",
 
-  "accent": "#ACDAFF",
-  "onAccent": "#000000",
-  "onSurface": "#FFFFFF"
- },
- {
-  "title": "SkyMuse",
-  "description": "A simple Android app using Capacitor.js, Svelte and Open-Meteo's weather API!",
-  
-  "github": "https://github.com/cakephone/skymuse",
+    "href": "https://cakephone.github.io/OreoSweeper",
+    "github": "https://github.com/cakephone/OreoSweeper",
 
-  "image": "/projects/SkyMuse.png",
+    "image": "/projects/OreoSweeper.jpg",
 
-  "accent": "#FFA191",
-  "onAccent": "#000000",
-  "onSurface": "#FFFFFF"
- },
- {
-  "title": "Escola Secundária de Amarante",
-  "description": "The official website for the Highschool I studied at.",
-  
-  "href": "https://esamarante.edu.pt",
+    "accent": "#ACDAFF",
+    "onAccent": "#000000",
+    "onSurface": "#FFFFFF"
+  },
+  {
+    "title": "SkyMuse",
+    "description": "A simple Android app using Capacitor.js, Svelte and Open-Meteo's weather API!",
 
-  "image": "/projects/EscolaSecundariaAmarante.png",
+    "github": "https://github.com/cakephone/skymuse",
 
-  "accent": "#61B8FF",
-  "onAccent": "#000000",
-  "onSurface": "#FFFFFF"
- }
+    "image": "/projects/SkyMuse.png",
+
+    "accent": "#FFA191",
+    "onAccent": "#000000",
+    "onSurface": "#FFFFFF"
+  },
+  {
+    "title": "Escola Secundária de Amarante",
+    "description": "The official website for the Highschool I studied at.",
+
+    "href": "https://esamarante.edu.pt",
+
+    "image": "/projects/EscolaSecundariaAmarante.png",
+
+    "accent": "#61B8FF",
+    "onAccent": "#000000",
+    "onSurface": "#FFFFFF"
+  }
 ]

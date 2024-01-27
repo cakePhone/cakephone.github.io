@@ -1,13 +1,13 @@
 export type project = {
-  title: string,
-  description: string,
+  title: string;
+  description: string;
 
-  href: string | null,
-  github: string | null,
+  href: string | null;
+  github: string | null;
 
-  image: string,
+  image: string;
 
-  accent: string,
-  onAccent: string,
+  accent: string;
+  onAccent: string;
   onSurface: string;
-}
+};
