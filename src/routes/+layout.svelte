@@ -1,24 +1,16 @@
 <script lang="ts">
   import "../app.css";
   import Bubble from "$lib/components/bubble.svelte";
-  import { windowWidth } from "$lib/stores";
   import { Body } from "svelte-body";
-
-  let updatedWindowWidth: number = 0;
-  function updateWindowWidth(width: number) {
-    windowWidth.set(width);
-  }
 
   let height: number = 0;
   let scroll: number = 0;
   let dissipate: boolean = false;
 
-  $: updateWindowWidth(updatedWindowWidth);
   $: dissipate = scroll > height * 0.6;
 </script>
 
 <svelte:window
-  bind:innerWidth={updatedWindowWidth}
   bind:innerHeight={height}
   bind:scrollY={scroll}
 />
