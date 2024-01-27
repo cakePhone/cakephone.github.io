@@ -1,3 +1,3 @@
-# My Portfolio
+# Miguel's official website/portfolio
 
-This is the repo to host my portfolio.
+Just the repo for my portfolio! Check it out [here](https://cakephone.github.io/)

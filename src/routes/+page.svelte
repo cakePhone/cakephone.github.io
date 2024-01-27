@@ -1,237 +1,104 @@
-<script>
-	import Link from '../components/Link.svelte';
-	import Card from '../components/Card.svelte';
-	import { AppShell, Avatar, TableOfContents, LightSwitch } from '@skeletonlabs/skeleton';
-	import Icon from '@iconify/svelte';
+<script lang="ts">
+  import Carousel from "$lib/components/carousel.svelte";
 
-	function getImageURL(name) {
-		return new URL(`../imgs/${name}.jpg`, import.meta.url).href;
-	}
-
-	let age = calculateAge();
-
-	function calculateAge() {
-		let ageDifMs = Date.now() - new Date('2006-05-21');
-		let ageDate = new Date(ageDifMs); // miliseconds from epoch
-		return Math.abs(ageDate.getUTCFullYear() - 1970);
-	}
+  let welcomeSpans: string[] = ["Welcome!", "I'm Miguel Santos."];
 </script>
 
-<AppShell
-	slotSidebarLeft="bg-surface-100-800-token w-64 hidden lg:block"
-	slotPageFooter="bg-surface-50-900-token w-full p-6"
->
-	<svelte:fragment slot="sidebarLeft">
-		<div class="flex h-full flex-col p-4">
-			<h1 class="h2 mb-4 text-center">My Portfolio</h1>
-			<div
-				class="bg-surface-200-700-token overflow-hidden p-4 transition-all rounded-container-token"
-			>
-				<div class="flex flex-col items-center">
-					<Avatar src={getImageURL('pfp')} class="mb-4 h-20 w-20" />
-					<h3 class="h3">Miguel Santos</h3>
-				</div>
-				<div class="mt-6 flex flex-col text-center">
-					<h4 class="h4">Contacts</h4>
-					<Link to="https://github.com/cakePhone" name="Github" icon="github" />
-					<Link to="https://instagram.com/cakephoneig" name="Instagram" icon="instagram" />
-					<Link to="mailto:miguelandrelealsantos.business@gmail.com" name="Email" icon="email" />
-				</div>
-			</div>
-			<TableOfContents
-				target="#main"
-				scrollParent="#main"
-				label="Here's what's on the page"
-				width="w-fit"
-				class="mt-6 flex flex-auto"
-			/>
+<section id="landing">
+  <h1 id="welcome">
+    {#each welcomeSpans as welcomeText, index}
+      <span class="fade-pop-up-in" style="--delay: {index * 1.2}s">
+        {welcomeText}
+      </span>
+      <br />
+    {/each}
+  </h1>
+  <div class="fade-pop-up-in welcome__details" style="--delay: 2s;">
+    <h2>Contact me:</h2>
+    <div>
+      <a href="mailto:miguelandrelealsantos.business@gmail.com">-Gmail-</a>
+      <a href="https://github.com/cakePhone">-Github-</a>
+      <a href="https://www.instagram.com/cakephoneig">-Intagram-</a>
+    </div>
+  </div>
+  <div class="fade-pop-up-in welcome__details" style="--delay: 2.5s;">
+    <h2>Or try:</h2>
+    <div>
+      <a href="#checkingmyprojects" class="id-anchor">checking<wbr/>my<wbr/>projects</a>
+      <a href="#takingaread" class="id-anchor">taking<wbr/>a<wbr/>read</a>
+    </div>
+  </div>
+</section>
+<hr />
+<article>
+  <section id="checkingmyprojects">
+    <h1>My Projects</h1>
+    <Carousel/>
+  </section>
 
-			<footer
-				class="bg-surface-200-700-token flex place-content-between items-center p-4 rounded-token"
-			>
-				<strong>Light Switch:</strong>
-				<LightSwitch />
-			</footer>
-		</div>
-	</svelte:fragment>
+  <section id="takingaread">
+    <h1>A little about myself</h1>
+    <p>
+      Hi! I'm Miguel Santos, a 17 year old Portuguese self-taught web developer.
+      I work mainly with Svelte, used for this website, but I have some
+      knowledge with Vue. My skills on the backend are not that great (as of
+      writing this), but I've been learning Go and C and I've experimented with
+      Rust, Kotlin and even Python! I can say I love tinkering around with
+      different programming languages feeling around for what I find more
+      intuitive to me.
+    </p>
+    <p>
+      I first started coding at the age of 14 when I got invited to an
+      internship at a start-up named "Lovys". But before joining, I was
+      challenged to work with Python and learn the basics of coding. I started
+      by taking a free Harvard course,
+      <a
+        href="https://pll.harvard.edu/course/cs50-introduction-computer-science"
+        class="anchor">CS50</a
+      >. I couldn't finish it, but I learnt a lot. In that internship, I learnt
+      a bit more of Python, working with APIs and a small library known by all,
+      turtle. And hey! That's me while at it!
+    </p>
+    <img
+      src="/about-myself/internship.jpg"
+      alt="Miguel sitting at his desk during the internship"
+    />
+    <img
+      src="/about-myself/internship-beach.jpg"
+      alt="Miguel leaning on a wall near Porto Beach"
+    />
+  </section>
 
-	<!--Mobile only Presentation-->
-	<div class="bg-surface-100-800-token relative p-6 lg:hidden">
-		<LightSwitch class="absolute left-6 top-[1.85rem]" />
-		<h1 class="h1 mb-4 text-center">My Portfolio</h1>
-		<div class="flex items-center justify-center space-x-6">
-			<Avatar src={getImageURL('pfp')} class="h-20 w-20" />
-			<h2 class="h2">Miguel<br />Santos</h2>
-		</div>
-		<h4 class="h4 mt-6 text-center">Contacts</h4>
-		<div class="flex flex-col items-center justify-center text-center md:flex-row">
-			<Link to="https://github.com/cakePhone" name="Github" icon="github" />
-			<Link to="https://instagram.com/cakephoneig" name="Instagram" icon="instagram" />
-			<Link to="mailto:miguelandrelealsantos.business@gmail.com" name="Email" icon="email" />
-		</div>
-	</div>
+  <section>
+    <h2>What got me into coding</h2>
+    <p>
+      I've always been keen on computers, my first electronic device was an
+      android tablet when I was only 5-6 years old. I can't remember the exact
+      model, but I know that not soon after I managed to find ways of cracking
+      my favourite and fastest growing game at the time, Minecraft. In 5th grade
+      I made an attempt at joining a programming club, but due to it being
+      overcrowded, I had to leave and joined my friend on another club.
+    </p>
+    <p>
+      Later on, at the end of 9th grade, I joined the internship I wrote about
+      above. That was the true spark of my coding journey. All thanks to my
+      cousin that never gave up motivating me to continue working and improving.
+      Not just in coding, but also in studies.
+    </p>
+  </section>
 
-	<main class="flex flex-col flex-wrap lg:flex-row lg:gap-6 lg:p-6" id="main">
-    <div
-			class="bg-surface-200-700-token flex h-fit flex-col gap-6 justify-self-center p-6 lg:rounded-token"
-		>
-			<h2 class="h2 text-center lg:text-left">My projects</h2>
-			<div class="flex flex-col items-center gap-6">
-				<Card
-					title="Oreo Home Page"
-					description="A customizable Home Page, built with Vue 3 for all your non-ugly browser needs."
-					image={getImageURL('OreoHomePage')}
-					link="https://cakephone.github.io/OreoSearchPage"
-					github="https://github.com/cakephone/oreosearchpage"
-				/>
-
-				<Card
-					title="OreoSweeper"
-					description="Nostalgia hits when you least expect it. Here's my first Svelte Project!"
-					image={getImageURL('OreoSweeper')}
-					link="https://cakephone.github.io/OreoSweeper"
-					github="https://github.com/cakephone/oreosweeper"
-				/>
-
-				<Card
-					title="SkyMuse"
-					description="An Android weather app built with Svelte and CapacitorJS using OpenMeteo's API."
-					image="https://github.com/cakePhone/SkyMuse/blob/main/Images/default.png?raw=true"
-					github="https://github.com/cakephone/SkyMuse"
-				/>
-			</div>
-		</div>
-		<div class="bg-surface-200-700-token h-fit p-6 flex flex-col items-center lg:items-start lg:min-w-[50ch] lg:rounded-token">
-			<h2 class="h2">A little about me</h2>
-			<div class="mt-4 max-w-prose">
-				<p class="leading-relaxed text-justify">
-					Hi! I'm Miguel Santos, a {age} year old Portuguese self-taught web developer. I work mainly
-					with Svelte, used for this website, but I have some knowledge with Vue and React. The latter
-					being my least worked with.
-					<br />
-					I first started coding at the age of 14 when I got invited to an internship at a start-up named
-					"Lovys". But before joining, I was challenged to work with Python and learn the basics of coding.
-					I started by taking a free Harvard course,
-					<a href="https://pll.harvard.edu/course/cs50-introduction-computer-science" class="anchor"
-						>CS50</a
-					>, in under a week. In that internship, I learnt a bit more of Python, working with APIs
-					and a small library known by all, turtle. And hey! That's me while at it!
-				</p>
-				<div class="flex flex-wrap gap-4 py-4">
-					<img
-						src={getImageURL('internship')}
-						alt="Miguel at an internship"
-						class="w-full object-cover rounded-token lg:h-72 lg:w-max"
-					/>
-					<img
-						src={getImageURL('internship-beach')}
-						alt="Miguel during his free time of the internship"
-						class="w-full object-cover rounded-token lg:h-72 lg:w-max"
-					/>
-				</div>
-
-				<h3 class="h3 mt-4">What got me into coding</h3>
-				<p class="mt-2 leading-relaxed text-justify">
-					I've always been keen on computers, my first electronic device was an android tablet when
-					I was only 5-6 years old. I can't remember the exact model, but I know that not soon after
-					I managed to find ways of cracking my favourite and fastest growing game at the time,
-					Minecraft. In 5th grade I made an attempt at joining a programming club, but due to it
-					being overcrowded, I had to leave and joined my friend on another club.
-					<br />
-					Later on, at the end of 9th grade, I joined the internship I wrote about above. That was the
-					true spark of my coding journey. All thanks to a family member that never gave up motivating
-					me to continue working and improving. Not just in coding, but also in studies.
-				</p>
-
-				<h3 class="h3 mt-4">My personality</h3>
-				<p class="mt-2 leading-relaxed text-justify">
-					I'm a very casual person around those I meet, especially with friends, despite the initial
-					interaction barrier being quite hard to break for me. I work mainly alone, but I'm open to
-					team work.
-					<br />
-					I'm a very focused worker, doing everything I set my mind to. My biggest flaw is that what
-					makes me a great worker is what holds me back too, if I simply set my mind to not do something,
-					I won't do it. I do try to go around it and push through my own lack of motivation for things
-					I find useless or without meaning.
-				</p>
-			</div>
-
-      <div class="items-center bg-surface-300-600-token p-4 rounded-token mt-6">
-        <h3 class="h3">Skills</h3>
-        <div class="mt-4 flex gap-4">
-          <div>
-            <h4 class="h4">Social</h4>
-            <label class="mt-2 w-48">
-              <p>Team work</p>
-              <progress value="0.5" class="bg-surface-50-900-token" />
-            </label>
-            <label class="mt-2 w-48">
-              <p>Communication</p>
-              <progress value="0.8" class="bg-surface-50-900-token"/>
-            </label>
-          </div>
-  
-          <div>
-            <h4 class="h4">Programming</h4>
-            <label class="mt-2 w-48">
-              <p>Python</p>
-              <progress value="0.4" class="bg-surface-50-900-token"/>
-            </label>
-          </div>
-  
-          <div>
-            <h4 class="h4">Web Development</h4>
-            <label class="mt-2 w-48">
-              <p>HTML/CSS</p>
-              <progress value="1" class="bg-surface-50-900-token"/>
-            </label>
-            <label class="mt-2 w-48">
-              <p>JavaScript/TypeScript</p>
-              <progress value="0.9" class="bg-surface-50-900-token"/>
-            </label>
-            <label class="mt-2 w-48">
-              <p>SvelteKit</p>
-              <progress value="0.7" class="bg-surface-50-900-token"/>
-            </label>
-            <label class="mt-2 w-48">
-              <p>Vue 3</p>
-              <progress value="0.8" class="bg-surface-50-900-token"/>
-            </label>
-          </div>
-        </div>
-      </div>
-		</div>
-	</main>
-
-	<svelte:fragment slot="pageFooter">
-		<strong>Built with:</strong>
-		<div class="flex flex-wrap">
-			<div class="text-token m-4 flex flex-col items-center">
-				<Icon icon="simple-icons:svelte" class="mb-2 h-10 w-10 p-[2px]" />
-				<p>Svelte</p>
-			</div>
-			<div class="text-token m-4 flex flex-col items-center">
-				<svg
-					class="fill-token mb-2 h-10 w-10"
-					xmlns="http://www.w3.org/2000/svg"
-					viewBox="0 0 104 120"
-					><path
-						fill-rule="evenodd"
-						d="M51.486 30.632c15.041 0 27.881 5.208 37.07 13.764 1.226-.379 2.265-.767 3.118-1.165 2.606-1.215 6.028-3.706 10.265-7.474-.688 6.563-1.427 11.381-2.216 14.454-.423 1.646-1.077 3.639-1.964 5.978a47.987 47.987 0 0 1 5.062 14.02c3.625 18.17-2.583 26.205-16.988 30.69.108.54.193 1.12.253 1.741.515 5.315-2.173 13.899-5.4 13.899-2.122 0-3.502-2.956-4.982-7.27-.463 4.996-2.74 10.731-5.379 10.731-2.222 0-3.63-3.24-5.192-7.889l-.22-.657c-.366-1.11-.744-2.292-1.145-3.522-.1.474-.205.96-.314 1.452l-.134.593C62.208 114.832 60.594 120 57.987 120c-3.027 0-1.367-9.529-6.47-13.567-25.873 1.41-47.638-8.154-47.638-35.75 0-5.078 1.202-10.039 3.405-14.643a55.737 55.737 0 0 1-1.1-2.28C4.467 49.97 2.405 44.232 0 36.55c6.153 4.59 10.872 7.325 14.157 8.204.329.088.671.165 1.027.23 8.617-8.633 21.5-14.352 36.302-14.352ZM45.45 67.86c-8.742 0-15.829 6.882-15.829 15.372s7.087 15.372 15.829 15.372c8.741 0 15.828-6.882 15.828-15.372 0-8.386-6.915-15.204-15.51-15.37Zm22.466 19.2c-2.645 0-4.04 5.648-4.04 8.182 0 1.979.664 3.071 1.746 3.27 2.626.244 1.825-3.583 3.132-3.583 1.394 0 3.026 3.915 4.392 3.384 1.622-.966 1.002-3.07.442-4.734-1.973-4.18-3.027-6.519-5.672-6.519Zm-22.1-16.981c7.549 0 13.668 5.862 13.668 13.093s-6.12 13.093-13.668 13.093c-.464 0-.923-.022-1.376-.066 6.903-.66 12.292-6.241 12.292-13.027s-5.39-12.367-12.291-13.028c.452-.043.911-.065 1.375-.065Zm39.31-3.12c-6.024 0-10.907 6.044-10.907 13.5S79.102 93.96 85.126 93.96s10.907-6.045 10.907-13.5c0-7.457-4.883-13.502-10.907-13.502Zm.352 2.228c5.03 0 9.107 5.039 9.107 11.255 0 6.215-4.077 11.254-9.107 11.254a7.47 7.47 0 0 1-1.368-.126c4.38-.816 7.739-5.487 7.739-11.128S88.49 70.129 84.11 69.313a7.46 7.46 0 0 1 1.368-.126Zm2.094-43.29c.35.227.448.694.222 1.044l-1.792 2.76a.754.754 0 0 1-.945.276l-.098-.054a.754.754 0 0 1-.222-1.043l1.792-2.76a.754.754 0 0 1 1.043-.223Zm-71.6-.728.07.087 1.652 2.36a.754.754 0 0 1-1.235.865l-1.652-2.36a.754.754 0 0 1 1.165-.952ZM53.954 0l1.709 14.476 6.371-7.161.165 17.826-1.263-.28c-3.684-.818-7.026-1.225-10.024-1.225-2.976 0-5.765.402-8.372 1.204l-1.404.433 1.15-22.296 5.828 11.018L53.954 0Zm-1.123 8.03-4.498 10.778-4.378-8.277-.617 11.951.131-.032c2.3-.567 4.717-.857 7.253-.87l.19-.001c2.748 0 5.747.322 9 .965l.207.041-.092-9.92-5.87 6.597L52.831 8.03Zm23.312 11.54a.755.755 0 0 1 .518.933l-.227.791a.754.754 0 0 1-.832.539l-.1-.022a.754.754 0 0 1-.518-.933l.227-.791a.754.754 0 0 1 .932-.517Zm-45.549-.85.424 1.306a.754.754 0 0 1-1.396.561l-.038-.095-.424-1.305a.754.754 0 0 1 1.434-.466Z"
-					/></svg
-				>
-				<p>Skeleton UI</p>
-			</div>
-			<div class="text-token m-4 flex flex-col items-center">
-				<Icon icon="simple-icons:tailwindcss" class="mb-2 h-10 w-10" />
-				<p>Tailwind CSS</p>
-			</div>
-			<div class="text-token m-4 flex flex-col items-center">
-				<Icon icon="mdi:heart" class="mb-2 h-10 w-10" />
-				<p>Love</p>
-			</div>
-		</div>
-		<br />
-		<p>Here, have a cookie, I don't use those: 🍪</p>
-	</svelte:fragment>
-</AppShell>
+  <section>
+    <h2>My personality</h2>
+    <p>
+      I'm a very casual person around those I meet, especially with friends,
+      despite the initial interaction barrier being quite hard to break for me.
+      I work mainly alone, but I'm open to team work.
+    </p>
+    <p>
+      I'm very focused on my work, doing everything I set my mind to. My biggest
+      flaw is exactly the same thing: if I simply set my mind to not do something,
+      I won't do it. I do try to go around it and push through my own lack of
+      motivation for things I find useless or without meaning.
+    </p>
+  </section>
+</article>
