@@ -7,13 +7,13 @@
 <section id="landing">
   <h1 id="welcome">
     {#each welcomeSpans as welcomeText, index}
-      <span class="fade-pop-up-in" style="--delay: {index}s">
+      <span class="fade-pop-up-in" style="--delay: {index - .5}s">
         {welcomeText}
       </span>
       <br />
     {/each}
   </h1>
-  <div class="fade-pop-up-in welcome__details" style="--delay: 4s;">
+  <div class="fade-pop-up-in welcome__details" style="--delay: 3s;">
     <h2>Contact me:</h2>
     <div>
       <a href="mailto:miguelandrelealsantos.business@gmail.com">-Gmail-</a>
@@ -22,7 +22,7 @@
       <a href="https://www.linkedin.com/in/miguel-andr%C3%A9-leal-santos-a2b3282b1/">-LinkedIn-</a>
     </div>
   </div>
-  <div class="fade-pop-up-in welcome__details" style="--delay: 4.5s;">
+  <div class="fade-pop-up-in welcome__details" style="--delay: 3.5s;">
     <h2>Or try:</h2>
     <div>
       <a href="#checkingmyprojects" class="id-anchor"
