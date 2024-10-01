@@ -346,6 +346,19 @@ footer a {
   animation-delay: var(--delay);
 }
 
+#gettingacookie {
+  position: relative;
+  background: none;
+  outline: none;
+  border: none;
+}
+
+.falling-cookie {
+  position: absolute;
+  top: 0;
+  left: calc(50% - 8px);
+}
+
 @keyframes fade-pop-up-in {
   from {
     opacity: 0;

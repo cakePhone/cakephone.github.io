@@ -38,10 +38,24 @@
     "onSurface": "#FFFFFF"
   },
   {
+    "title": "Everthorn",
+    "description": "The everthorn.net website, a Minecraft BE Server",
+
+    "href": "http://everthorn.net",
+    "github": "https://github.com/protocolpav/everthorn.net",
+
+    "image": "/projects/everthorn.net.png",
+
+    "accent": "#33d39c",
+    "onAccent": "#000000",
+    "onSurface": "#FFFFFF"
+  },
+  {
     "title": "Escola Secundária de Amarante",
-    "description": "The official website for the Highschool I studied at.",
+    "description": "The (supposed) official website for the Highschool I studied at.",
 
     "href": "https://esamarante.edu.pt",
+    "github": "https://github.com/cakephone/SiteDaEscola",
 
     "image": "/projects/EscolaSecundariaAmarante.png",
 
