@@ -88,11 +88,11 @@
       turtle. And hey! That's me while at it!
     </p>
     <img
-      src="/about-myself/internship.jpg"
+      src="/about-myself/internship.webp"
       alt="Miguel sitting at his desk during the internship"
     />
     <img
-      src="/about-myself/internship-beach.jpg"
+      src="/about-myself/internship-beach.webp"
       alt="Miguel leaning on a wall near Porto Beach"
     />
   </section>
