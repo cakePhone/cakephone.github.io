@@ -1,34 +1,18 @@
-import { error } from "@sveltejs/kit";
-import { marked } from "marked";
-import DOMPurify from "isomorphic-dompurify";
+import type { EntryGenerator } from "./$types";
 
-export async function load({ params }) {
+export async function entries(): Promise<EntryGenerator> {
+  let posts: Post[];
   try {
-    let { title } = params;
-
-    let posts: Post[] = await (
-      await fetch("http://localhost:5173/blog/posts.json")
+    posts = await (
+      await fetch("http://cakephone.github.io/blog/posts.json")
     ).json();
-
-    let post = posts.find((post) => post.asset_path === title);
-
-    if (!post) {
-      error(404, `Post not found`);
-    }
-
-    let content = await fetch(
-      `https://cakephone.github.io/blog/${post.asset_path}/post.md`,
-    );
-
-    if (!content.ok) {
-      error(404, `Post content not found`);
-    }
-    let text = await content.text();
-    let html = DOMPurify.sanitize(await marked.parse(text));
-
-    return { html };
-  } catch (err) {
-    console.error(err);
-    error(404, `Post not found: ${params.title}`);
+  } catch (e) {
+    posts = await (await fetch("http://localhost:5173/blog/posts.json")).json();
   }
+
+  return posts.map((post) => ({
+    title: post.asset_path,
+  }));
 }
+
+export const prerender = true;
