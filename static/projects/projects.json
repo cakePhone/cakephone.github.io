@@ -7,7 +7,7 @@
 
     "image": "/projects/aki-home.webp",
 
-    "accent": "",
+    "accent": "#FFA256",
     "on-accent": "",
     "on-surface": ""
   },
