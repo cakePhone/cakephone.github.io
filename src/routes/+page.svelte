@@ -57,8 +57,8 @@
     <h1>Who am I?</h1>
     <h2 style="margin-top: 12px;">Brief resumé</h2>
     <p>
-      🎓 I'm taking a Bachelor's Degree in Computer Science at Universidade do
-      Minho.
+      🎓 I'm taking a Bachelor's Degree in Software Engineering at Universidade
+      do Minho.
     </p>
     <p>
       👨‍💻 I'm experienced with HTML, CSS, JS and popular JS Frameworks such as
