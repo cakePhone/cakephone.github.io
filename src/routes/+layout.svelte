@@ -3,10 +3,9 @@
   import Bubble from "$lib/components/bubble.svelte";
   import { Body } from "svelte-body";
   import FallingCookie from "$lib/components/falling-cookie.svelte";
-  import { derived } from "svelte/store";
 
   interface Props {
-    children?: import('svelte').Snippet;
+    children?: import("svelte").Snippet;
   }
 
   let { children }: Props = $props();
@@ -16,7 +15,7 @@
 
   let height: number = $state(0);
   let scroll: number = $state(0);
-  let dissipate: boolean = $derived(scroll > height * .6);
+  let dissipate: boolean = $derived(scroll > height * 0.6);
 
   function popOutCookie() {
     fallingCookies = [...fallingCookies, { id: nextCookieId++ }];
