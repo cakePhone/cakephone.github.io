@@ -1,7 +1,7 @@
 import type { EntryGenerator } from "./$types";
 
 export async function entries(): Promise<EntryGenerator> {
-  return { title: "about-me" };
+  return [{ title: "about-me" }];
   let posts: Post[];
   try {
     posts = await (
