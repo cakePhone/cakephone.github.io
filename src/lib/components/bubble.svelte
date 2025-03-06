@@ -1,23 +1,111 @@
 <script lang="ts">
+  import { onMount } from "svelte";
+
   interface Props {
     color?: string;
     dissipate?: boolean;
   }
 
+  interface Vector2 {
+    x: number;
+    y: number;
+  }
+
+  let lastTimestamp: number | undefined;
+
+  let p: Vector2 = $state({
+    x: (Math.random() - 0.5) * 100,
+    y: (Math.random() - 0.5) * 100,
+  });
+  let v: Vector2 = {
+    x: (Math.random() - 0.5) * 5,
+    y: (Math.random() - 0.5) * 5,
+  };
+  let a: Vector2 = {
+    x: (Math.random() - 0.5) * 2,
+    y: (Math.random() - 0.5) * 2,
+  };
+
+  let dir: number = Math.atan2(v.y, v.x) + (Math.random() - 0.5) * Math.PI * 2;
+
+  let distFromOrigin: number = 0;
+
+  function addV2(v1: Vector2, v2: Vector2) {
+    return { x: v1.x + v2.x, y: v1.y + v2.y };
+  }
+
+  function scaleV2(v: Vector2, scalar: number) {
+    return { x: v.x * scalar, y: v.y * scalar };
+  }
+
+  function lengthV2(v: Vector2): number {
+    return Math.sqrt(v.x ** 2 + v.y ** 2);
+  }
+
+  function bubbleLifeLoop(timestamp: number) {
+    if (typeof lastTimestamp === "undefined") lastTimestamp = timestamp;
+
+    if (dissipate) {
+      const angleChange = (Math.random() - 0.5) * 0.2;
+      const currentSpeed = lengthV2(v);
+      let currentAngle = Math.atan2(v.y, v.x) + angleChange;
+      v = {
+        x: Math.cos(currentAngle) * currentSpeed,
+        y: Math.sin(currentAngle) * currentSpeed,
+      };
+      requestAnimationFrame(bubbleLifeLoop);
+      return;
+    }
+
+    const dt = (timestamp - lastTimestamp) / 100;
+    lastTimestamp = timestamp;
+
+    const angleChange = (Math.random() - 0.5) * 0.2;
+    const currentSpeed = lengthV2(v);
+    let currentAngle = Math.atan2(v.y, v.x) + angleChange;
+    v = {
+      x: Math.cos(currentAngle) * currentSpeed,
+      y: Math.sin(currentAngle) * currentSpeed,
+    };
+
+    const centerAttractionStrength = 0.005 * Math.exp(distFromOrigin / 100);
+    const attraction = {
+      x: -p.x * centerAttractionStrength,
+      y: -p.y * centerAttractionStrength,
+    };
+    v = addV2(v, scaleV2(addV2(a, attraction), dt));
+
+    if (lengthV2(v) < 0.001) {
+      v = { x: 0, y: 0 };
+    }
+
+    p = addV2(p, scaleV2(v, dt));
+    distFromOrigin = lengthV2(p);
+
+    requestAnimationFrame(bubbleLifeLoop);
+  }
+
+  onMount(() => {
+    requestAnimationFrame(bubbleLifeLoop);
+  });
+
   let { color = "red", dissipate = false }: Props = $props();
 </script>
 
-<div class="bubble" class:dissipate style="--color: {color};"></div>
+<div
+  class="bubble"
+  class:dissipate
+  style="--color: {color}; --x: {p.x}px; --y: {p.y * -1}px"
+></div>
 
 <style>
   .bubble {
-    --max-pos-deviation: 150px;
     --size: 300px;
 
     position: absolute;
 
-    top: calc(var(--size) / -2);
-    left: calc(var(--size) / -2);
+    transform: translateX(calc(var(--size) / -2 + var(--x)))
+      translateY(calc(var(--size) / -2 + var(--y)));
 
     height: var(--size);
     width: var(--size);
@@ -27,169 +115,11 @@
     border-radius: 100%;
     filter: blur(calc(var(--size) / 4));
 
-    transition: all 1s;
-  }
-
-  .bubble:nth-child(1) {
-    animation: bubble-float-1 10s linear infinite;
-  }
-
-  .bubble:nth-child(2) {
-    animation: bubble-float-2 8s linear infinite;
-  }
-
-  .bubble:nth-child(3) {
-    animation: bubble-float-3 15s linear infinite;
+    transition: opacity 0.5s ease-in-out;
   }
 
   .dissipate {
     opacity: 0;
-  }
-
-  @keyframes bubble-float-1 {
-    0% {
-      transform: translate(
-        calc(var(--max-pos-deviation) * cos(0deg)),
-        calc(var(--max-pos-deviation) * sin(0deg))
-      );
-    }
-
-    10% {
-      transform: translate(
-        calc(var(--max-pos-deviation) * cos(36deg)),
-        calc(var(--max-pos-deviation) * sin(36deg))
-      );
-    }
-
-    20% {
-      transform: translate(
-        calc(var(--max-pos-deviation) * cos(72deg)),
-        calc(var(--max-pos-deviation) * sin(72deg))
-      );
-    }
-
-    30% {
-      transform: translate(
-        calc(var(--max-pos-deviation) * cos(108deg)),
-        calc(var(--max-pos-deviation) * sin(108deg))
-      );
-    }
-
-    40% {
-      transform: translate(
-        calc(var(--max-pos-deviation) * cos(144deg)),
-        calc(var(--max-pos-deviation) * sin(144deg))
-      );
-    }
-
-    50% {
-      transform: translate(
-        calc(var(--max-pos-deviation) * cos(180deg)),
-        calc(var(--max-pos-deviation) * sin(180deg))
-      );
-    }
-
-    60% {
-      transform: translate(
-        calc(var(--max-pos-deviation) * cos(-144deg)),
-        calc(var(--max-pos-deviation) * sin(-144deg))
-      );
-    }
-
-    70% {
-      transform: translate(
-        calc(var(--max-pos-deviation) * cos(-108deg)),
-        calc(var(--max-pos-deviation) * sin(-108deg))
-      );
-    }
-
-    80% {
-      transform: translate(
-        calc(var(--max-pos-deviation) * cos(-72deg)),
-        calc(var(--max-pos-deviation) * sin(-72deg))
-      );
-    }
-
-    90% {
-      transform: translate(
-        calc(var(--max-pos-deviation) * cos(-36deg)),
-        calc(var(--max-pos-deviation) * sin(-36deg))
-      );
-    }
-
-    100% {
-      transform: translate(
-        calc(var(--max-pos-deviation) * cos(0deg)),
-        calc(var(--max-pos-deviation) * sin(0deg))
-      );
-    }
-  }
-
-  @keyframes bubble-float-2 {
-    0% {
-      transform: translate(
-        calc(var(--max-pos-deviation) * cos(0deg)),
-        calc(var(--max-pos-deviation) * sin(0deg))
-      );
-    }
-
-    33% {
-      transform: translate(
-        calc(var(--max-pos-deviation) * cos(120deg)),
-        calc(var(--max-pos-deviation) * sin(120deg))
-      );
-    }
-
-    66% {
-      transform: translate(
-        calc(var(--max-pos-deviation) * cos(240deg)),
-        calc(var(--max-pos-deviation) * sin(240deg))
-      );
-    }
-
-    100% {
-      transform: translate(
-        calc(var(--max-pos-deviation) * cos(0deg)),
-        calc(var(--max-pos-deviation) * sin(0deg))
-      );
-    }
-  }
-
-  @keyframes bubble-float-3 {
-    0% {
-      transform: translate(
-        calc(var(--max-pos-deviation) * cos(0deg)),
-        calc(var(--max-pos-deviation) * sin(0deg))
-      );
-    }
-
-    25% {
-      transform: translate(
-        calc(var(--max-pos-deviation) * cos(90deg)),
-        calc(var(--max-pos-deviation) * sin(90deg))
-      );
-    }
-
-    50% {
-      transform: translate(
-        calc(var(--max-pos-deviation) * cos(180deg)),
-        calc(var(--max-pos-deviation) * sin(180deg))
-      );
-    }
-
-    75% {
-      transform: translate(
-        calc(var(--max-pos-deviation) * cos(270deg)),
-        calc(var(--max-pos-deviation) * sin(270deg))
-      );
-    }
-
-    100% {
-      transform: translate(
-        calc(var(--max-pos-deviation) * cos(0deg)),
-        calc(var(--max-pos-deviation) * sin(0deg))
-      );
-    }
   }
 
   @media only screen and (max-width: 600px) {
