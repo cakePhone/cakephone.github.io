@@ -1,6 +1,10 @@
 <script lang="ts">
-  export let color: string = "red";
-  export let dissipate: boolean = false;
+  interface Props {
+    color?: string;
+    dissipate?: boolean;
+  }
+
+  let { color = "red", dissipate = false }: Props = $props();
 </script>
 
 <div class="bubble" class:dissipate style="--color: {color};"></div>

@@ -3,21 +3,19 @@
   import type { project } from "$lib";
   import Project from "./project.svelte";
 
-  let projectsJson: project[] = [];
-  let carousel: HTMLElement;
-  let carouselScroll: number = 0;
-  let width: number = 1;
+  let projectsJson: project[] = $state([]);
+  let carouselElement: HTMLElement | undefined = $state(undefined);
+  let carouselScroll: number = $state(0);
+  let width: number = $state(1);
 
-  let currentShowingIndex: number = 0;
+  let currentShowingIndex: number = $derived(
+    Math.round(carouselScroll / width),
+  );
 
-  let hasInteracted: boolean = false;
-
-  function defineCarouselScroll() {
-    carouselScroll = carousel.scrollLeft;
-  }
+  let hasInteracted: boolean = $state(false);
 
   function scrollToIndex(index: number) {
-    carousel.scrollTo({
+    carouselElement?.scrollTo({
       left: index * width,
       behavior: "smooth",
     });
@@ -26,14 +24,16 @@
   onMount(async () => {
     projectsJson = await (await fetch("/projects/projects.json")).json();
 
+    console.log(projectsJson);
+
     const projectCarouselLoop = setInterval(() => {
       if (hasInteracted) {
         clearInterval(projectCarouselLoop);
       } else {
         if (currentShowingIndex < projectsJson.length - 1) {
-          currentShowingIndex++;
+          scrollToIndex(currentShowingIndex + 1);
         } else {
-          currentShowingIndex = 0;
+          scrollToIndex(0);
         }
 
         scrollToIndex(currentShowingIndex);
@@ -41,13 +41,13 @@
     }, 6000);
   });
 
-  $: currentShowingIndex = Math.round(carouselScroll / width);
+  $inspect(width, carouselScroll, currentShowingIndex, hasInteracted);
 </script>
 
 <section
-  bind:this={carousel}
+  onscroll={(e) => (carouselScroll = e.currentTarget.scrollLeft)}
+  bind:this={carouselElement}
   bind:clientWidth={width}
-  on:scroll={defineCarouselScroll}
   id="carousel"
 >
   {#if projectsJson.length !== 0}
@@ -67,13 +67,13 @@
 </section>
 <div class="carousel__page-indicators">
   {#each projectsJson as _, index}
-    <!-- svelte-ignore a11y-click-events-have-key-events -->
-    <!-- svelte-ignore a11y-no-static-element-interactions -->
+    <!-- svelte-ignore a11y_click_events_have_key_events -->
+    <!-- svelte-ignore a11y_no_static_element_interactions -->
     <div
       class="carousel__page-indicators__indicator"
       class:current={currentShowingIndex === index}
       data-looping={!hasInteracted}
-      on:click={() => {
+      onclick={() => {
         scrollToIndex(index);
         hasInteracted = true;
       }}
