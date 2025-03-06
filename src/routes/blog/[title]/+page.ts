@@ -17,7 +17,7 @@ export async function load({ params }) {
     }
 
     let content = await fetch(
-      `http://localhost:5173/blog/${post.asset_path}/post.md`,
+      `https://cakephone.github.io/blog/${post.asset_path}/post.md`,
     );
 
     if (!content.ok) {
