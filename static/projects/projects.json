@@ -1,7 +1,19 @@
 [
   {
+    "title": "Aki Home",
+    "description": "Simple, customizable and integrated home page extension.",
+
+    "github": "https://github.com/cakephone/aki-home",
+
+    "image": "",
+
+    "accent": "",
+    "on-accent": "",
+    "on-surface": ""
+  },
+  {
     "title": "OreoSearchPage",
-    "description": "A simplistic approach to a custom home page.",
+    "description": "The predecessor to Aki Home approach to a custom home page.",
 
     "href": "https://cakephone.github.io/OreoSearchPage",
     "github": "https://github.com/cakephone/skymuse",
