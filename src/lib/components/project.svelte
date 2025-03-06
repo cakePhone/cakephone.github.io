@@ -1,9 +1,4 @@
 <script lang="ts">
-  import { onMount } from "svelte";
-
-
-
-
   interface Props {
     title?: string;
     description?: string;
@@ -23,7 +18,7 @@
     image,
     accent = "#787896",
     onAccent = "#000000",
-    onSurface = "#FFFFFF"
+    onSurface = "#FFFFFF",
   }: Props = $props();
 </script>
 
