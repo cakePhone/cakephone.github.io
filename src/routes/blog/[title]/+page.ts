@@ -10,11 +10,8 @@ export async function entries(): Promise<EntryGenerator> {
     posts = await (await fetch("http://localhost:5173/blog/posts.json")).json();
   }
 
-<<<<<<< HEAD
   return { title: "about-me" };
 
-=======
->>>>>>> b8993b21edd5f0589e7f8233753dba5ad51b0649
   return posts.map((post) => ({
     title: post.asset_path,
   }));
