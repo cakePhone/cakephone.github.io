@@ -1,4 +1,5 @@
 <script lang="ts">
+  import PostCard from "$lib/components/post-card.svelte";
   import { onMount } from "svelte";
 
   let posts: Post[] = $state([]);
@@ -7,19 +8,15 @@
     const postsResponse = await fetch("/blog/posts.json");
     posts = await postsResponse.json();
   });
+
+  $inspect(posts);
 </script>
 
-<article>
-  <h1>Welcome to my blog!</h1>
-  <h3>Feel free to look around.</h3>
-  <h3>Or go <a href="/">back</a></h3>
+<h1>Welcome to my blog!</h1>
+<p>Feel free to look around.</p>
 
+{#if posts.length != 0}
   {#each posts as post}
-    <div class="post">
-      <h4>{post.title}</h4>
-      <p>{post.date}</p>
-      <p>Tags: {post.tags.join(", ")}</p>
-      <a href={`/blog/${post.title}`}>Read more</a>
-    </div>
+    <PostCard {post} />
   {/each}
-</article>
+{/if}
