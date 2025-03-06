@@ -39,7 +39,7 @@
       <a href="#checkingmyprojects" class="id-anchor"
         >checking<wbr />my<wbr />projects</a
       >
-      <a href="#takingaread" class="id-anchor">taking<wbr />a<wbr />read</a>
+      <a href="/blog" class="id-anchor">taking<wbr />a<wbr />read</a>
       <a href="#gettingacookie" class="id-anchor"
         >getting<wbr />a<wbr />cookie</a
       >
