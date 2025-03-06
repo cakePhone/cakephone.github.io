@@ -12,6 +12,7 @@
 <article>
   <h1>Welcome to my blog!</h1>
   <h3>Feel free to look around.</h3>
+  <h3>Or go <a href="/">back</a></h3>
 
   {#each posts as post}
     <div class="post">
