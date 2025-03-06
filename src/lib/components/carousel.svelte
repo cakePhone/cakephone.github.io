@@ -1,9 +1,8 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import type { project } from "$lib";
   import Project from "./project.svelte";
 
-  let projectsJson: project[] = $state([]);
+  let projectsJson: ProjectData[] = $state([]);
   let carouselElement: HTMLElement | undefined = $state(undefined);
   let carouselScroll: number = $state(0);
   let width: number = $state(1);

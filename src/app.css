@@ -70,6 +70,30 @@ body.change-colors {
   --surface: #ddd4ff;
 }
 
+header {
+  display: flex;
+  justify-content: space-between;
+  width: var(--article-width);
+  margin-inline: auto;
+
+  border-bottom: dashed 3px var(--accent);
+  color: var(--on-surface-headings);
+}
+
+header nav {
+  display: flex;
+  gap: 2rem;
+  margin-top: 1.15rem;
+
+  height: 1.5rem;
+}
+
+header nav a  {
+  text-decoration: none;
+  font-family: var(--ff-headings);
+  height: 1.4rem;
+}
+
 h1,
 h2,
 h3,
