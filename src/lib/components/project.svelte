@@ -1,17 +1,30 @@
 <script lang="ts">
   import { onMount } from "svelte";
 
-  export let title: string = "";
-  export let description: string = "";
 
-  export let href: string | null;
-  export let github: string | null;
 
-  export let image: string;
 
-  export let accent: string = "#787896";
-  export let onAccent: string = "#000000";
-  export let onSurface: string = "#FFFFFF";
+  interface Props {
+    title?: string;
+    description?: string;
+    href: string | null;
+    github: string | null;
+    image: string;
+    accent?: string;
+    onAccent?: string;
+    onSurface?: string;
+  }
+
+  let {
+    title = "",
+    description = "",
+    href,
+    github,
+    image,
+    accent = "#787896",
+    onAccent = "#000000",
+    onSurface = "#FFFFFF"
+  }: Props = $props();
 </script>
 
 <div

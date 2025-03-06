@@ -1,16 +1,18 @@
 <script lang="ts">
+  import { run } from "svelte/legacy";
+
   import { onMount } from "svelte";
   import type { project } from "$lib";
   import Project from "./project.svelte";
 
-  let projectsJson: project[] = [];
-  let carousel: HTMLElement;
-  let carouselScroll: number = 0;
-  let width: number = 1;
+  let projectsJson: project[] = $state([]);
+  let carousel: HTMLElement | undefined = $state();
+  let carouselScroll: number = $state(0);
+  let width: number = $state(1);
 
-  let currentShowingIndex: number = 0;
+  let currentShowingIndex: number = $state(0);
 
-  let hasInteracted: boolean = false;
+  let hasInteracted: boolean = $state(false);
 
   function defineCarouselScroll() {
     carouselScroll = carousel.scrollLeft;
@@ -41,13 +43,15 @@
     }, 6000);
   });
 
-  $: currentShowingIndex = Math.round(carouselScroll / width);
+  run(() => {
+    currentShowingIndex = Math.round(carouselScroll / width);
+  });
 </script>
 
 <section
   bind:this={carousel}
   bind:clientWidth={width}
-  on:scroll={defineCarouselScroll}
+  onscroll={defineCarouselScroll}
   id="carousel"
 >
   {#if projectsJson.length !== 0}
@@ -67,13 +71,13 @@
 </section>
 <div class="carousel__page-indicators">
   {#each projectsJson as _, index}
-    <!-- svelte-ignore a11y-click-events-have-key-events -->
-    <!-- svelte-ignore a11y-no-static-element-interactions -->
+    <!-- svelte-ignore a11y_click_events_have_key_events -->
+    <!-- svelte-ignore a11y_no_static_element_interactions -->
     <div
       class="carousel__page-indicators__indicator"
       class:current={currentShowingIndex === index}
       data-looping={!hasInteracted}
-      on:click={() => {
+      onclick={() => {
         scrollToIndex(index);
         hasInteracted = true;
       }}
