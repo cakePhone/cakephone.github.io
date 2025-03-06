@@ -70,10 +70,10 @@
     <h2>A little about myself</h2>
     <p>
       Hi! I'm Miguel Santos, a {age} year old Portuguese self-taught web developer.
-      I work mainly with Svelte (used for this website), NextJS and Vue. Backend
-      is not a strong point and I've been learning Go and C. I've experimented with
-      Rust, Kotlin and even Python! I can say I love tinkering around with different
-      programming languages feeling around for what I find more intuitive to me.
+      I work mainly with Svelte (used for this website) and NextJS. Backend is not
+      a strong point and I've been learning Go and C. I've experimented with Rust,
+      Kotlin and even Python! I can say I love tinkering around with different programming
+      languages feeling around for what I find more intuitive to me.
     </p>
     <p>
       I first started coding at the age of 14 when I got invited to an
