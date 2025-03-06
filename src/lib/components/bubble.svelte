@@ -45,18 +45,6 @@
   function bubbleLifeLoop(timestamp: number) {
     if (typeof lastTimestamp === "undefined") lastTimestamp = timestamp;
 
-    if (dissipate) {
-      const angleChange = (Math.random() - 0.5) * 0.2;
-      const currentSpeed = lengthV2(v);
-      let currentAngle = Math.atan2(v.y, v.x) + angleChange;
-      v = {
-        x: Math.cos(currentAngle) * currentSpeed,
-        y: Math.sin(currentAngle) * currentSpeed,
-      };
-      requestAnimationFrame(bubbleLifeLoop);
-      return;
-    }
-
     const dt = (timestamp - lastTimestamp) / 100;
     lastTimestamp = timestamp;
 
