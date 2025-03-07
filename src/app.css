@@ -154,6 +154,7 @@ article p {
   text-align: justify;
   line-height: calc(var(--fs-content) * 1.6);
   text-wrap: pretty;
+  word-wrap: break-word;
 }
 
 article a {
