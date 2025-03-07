@@ -84,7 +84,7 @@ header {
 header nav {
   display: flex;
   gap: 2rem;
-  margin-top: 1.15rem;
+  margin-top: 1.3rem;
 
   height: 1.5rem;
 }
