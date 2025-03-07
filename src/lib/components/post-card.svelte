@@ -16,18 +16,26 @@
   .post-card {
     border: dashed 3px var(--accent);
     border-radius: 1rem;
+    padding-block: 0.75rem;
     padding-inline: 1rem;
 
     transition: border-color 0.1s ease-in-out;
   }
 
-  .post-card:hover {
+  .post-card:hover,
+  .post-card:focus {
     border-color: var(--on-surface-headings);
   }
 
   .inline {
     display: flex;
-    gap: 1rem;
+    flex-wrap: wrap;
+
+    gap: 0.1rem 1rem;
+  }
+
+  .inline * {
+    margin-block: 0;
   }
 
   .tags {
@@ -35,7 +43,7 @@
   }
 
   h4 {
-    margin-block: 1rem;
+    padding-top: 0.1rem;
     height: 1.5rem;
     font-size: inherit;
   }

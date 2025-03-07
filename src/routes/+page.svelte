@@ -4,7 +4,8 @@
   let welcomeSpans: string[] = [
     "Welcome!",
     "I'm Miguel Santos.",
-    "a Web Developer",
+    "a Web Developer, ",
+    "Software Engineer",
     "and Designer",
   ];
 
@@ -21,7 +22,10 @@
       <br />
     {/each}
   </h1>
-  <div class="fade-pop-up-in welcome__details" style="--delay: 3s;">
+  <div
+    class="fade-pop-up-in welcome__details"
+    style="--delay: {welcomeSpans.length}s;"
+  >
     <h2>Contact me:</h2>
     <div>
       <a href="mailto:miguelandrelealsantos.business@gmail.com">-Gmail-</a>
@@ -33,7 +37,10 @@
       >
     </div>
   </div>
-  <div class="fade-pop-up-in welcome__details" style="--delay: 3.5s;">
+  <div
+    class="fade-pop-up-in welcome__details"
+    style="--delay: {welcomeSpans.length + 0.5}s;"
+  >
     <h2>Or try:</h2>
     <div>
       <a href="#checkingmyprojects" class="id-anchor"
