@@ -13,7 +13,6 @@
       }
     }, 100);
   });
-  $inspect(title_text);
 </script>
 
 <div class="splash">
