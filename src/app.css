@@ -48,7 +48,7 @@ body {
   --fs-headings: 1.8rem;
 
   --ff-content: "DM Serif Text", serif;
-  --fs-content: 1.4rem;
+  --fs-content: 1.2rem;
 
   /* == Sizing == */
   --article-width: min(75ch, 100% - calc(var(--min-margin) * 2));
@@ -104,6 +104,7 @@ h6,
 a {
   color: var(--accent);
   font-family: "Borel", cursive;
+  text-wrap: pretty;
 }
 
 h1 {
@@ -439,6 +440,7 @@ footer a {
 @media only screen and (min-width: 900px) {
   body {
     --fs-headings: 2.5rem;
+    --fs-content: 1.4rem;
   }
 }
 
