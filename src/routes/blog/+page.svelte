@@ -15,8 +15,17 @@
 <h1>Welcome to my blog!</h1>
 <p>Feel free to look around.</p>
 
-{#if posts.length != 0}
-  {#each posts as post}
-    <PostCard {post} />
-  {/each}
-{/if}
+<div class="container">
+  {#if posts.length != 0}
+    {#each posts as post}
+      <PostCard {post} />
+    {/each}
+  {/if}
+</div>
+
+<style>
+  .container {
+    display: grid;
+    gap: 0.5rem;
+  }
+</style>
