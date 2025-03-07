@@ -32,7 +32,7 @@
     --initial-font-size: 4rem;
     --final-font-size: 2rem;
     --initial-transform: translate(-50%, -50%);
-    --final-transform: translate(-50%, -600%);
+    --final-transform: translate(0, -600%);
     display: flex;
     justify-content: center;
     align-items: center;
