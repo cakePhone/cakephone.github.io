@@ -9,6 +9,8 @@
     "and Designer",
   ];
 
+  let displaySpeed: number = 0.9;
+
   let age: number =
     new Date().getFullYear() - 2006 - (new Date().getMonth() < 4 ? 1 : 0);
 </script>
@@ -16,7 +18,7 @@
 <section id="landing">
   <h1 id="welcome">
     {#each welcomeSpans as welcomeText, index}
-      <span class="fade-pop-up-in" style="--delay: {index - 0.5}s">
+      <span class="fade-pop-up-in" style="--delay: {index * displaySpeed}s">
         {welcomeText}
       </span>
       <br />
@@ -24,7 +26,7 @@
   </h1>
   <div
     class="fade-pop-up-in welcome__details"
-    style="--delay: {welcomeSpans.length}s;"
+    style="--delay: {welcomeSpans.length * displaySpeed + displaySpeed * 0.2}s;"
   >
     <h2>Contact me:</h2>
     <div>
@@ -39,7 +41,7 @@
   </div>
   <div
     class="fade-pop-up-in welcome__details"
-    style="--delay: {welcomeSpans.length + 0.5}s;"
+    style="--delay: {welcomeSpans.length * displaySpeed + displaySpeed * 0.5}s;"
   >
     <h2>Or try:</h2>
     <div>

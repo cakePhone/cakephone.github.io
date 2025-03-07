@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { page } from "$app/state";
+  import { Body } from "svelte-body";
 
   let { children } = $props();
 
@@ -15,9 +16,15 @@
         title_text += to_add[i];
       }, i * 100);
     }
-    done = true;
+    setTimeout(() => {
+      done = true;
+    }, to_add.length * 100);
   });
 </script>
+
+{#if done}
+  <Body class="change-colors" />
+{/if}
 
 <div class="splash" class:fade-out={done}>
   <h1>{title_text}</h1>

@@ -3,6 +3,8 @@
   import Bubble from "$lib/components/bubble.svelte";
   import { Body } from "svelte-body";
   import FallingCookie from "$lib/components/falling-cookie.svelte";
+  import { page } from "$app/state";
+  import { onMount } from "svelte";
 
   interface Props {
     children?: import("svelte").Snippet;
@@ -13,9 +15,16 @@
   let fallingCookies: { id: number }[] = $state([]);
   let nextCookieId: number = 0;
 
+  const paths_to_keep_bubbles = ["/blog", "/"];
+  const inPathThatKeepsBubbles = $derived(
+    paths_to_keep_bubbles.some((str) => str == page.url.pathname),
+  );
+
+  let timedDissipate: boolean = $state(false);
+
   let height: number = $state(0);
   let scroll: number = $state(0);
-  let dissipate: boolean = $derived(scroll > height * 0.6);
+  let dissipate: boolean = $derived(scroll > height * 0.6 || timedDissipate);
 
   function popOutCookie() {
     fallingCookies = [...fallingCookies, { id: nextCookieId++ }];
@@ -24,10 +33,22 @@
   function removeCookie(id: number) {
     fallingCookies = fallingCookies.filter((cookie) => cookie.id != id);
   }
+
+  $effect(() => {
+    if (!inPathThatKeepsBubbles) {
+      setTimeout(() => {
+        timedDissipate = true;
+      }, 1000);
+    } else {
+      timedDissipate = false;
+    }
+  });
+
+  onMount(() => {});
 </script>
 
 <svelte:window bind:innerHeight={height} bind:scrollY={scroll} />
-{#if height * 0.6 < scroll}
+{#if dissipate}
   <Body class="change-colors" />
 {/if}
 
