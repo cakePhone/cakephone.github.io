@@ -56,6 +56,12 @@
       y: Math.sin(currentAngle) * currentSpeed,
     };
 
+    const maxSpeed = 20;
+    const currentVelocity = lengthV2(v);
+    if (currentVelocity > maxSpeed) {
+      v = scaleV2(v, maxSpeed / currentVelocity);
+    }
+
     const centerAttractionStrength = 0.005 * Math.exp(distFromOrigin / 100);
     const attraction = {
       x: -p.x * centerAttractionStrength,
