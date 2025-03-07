@@ -25,7 +25,7 @@ The code in there might seem a little weird, no? Fetch the official page... if t
 ### What about the Markdown? Browsers don't render that out like champs!
 
 MARKER! PAULER!! Uh? Where did he go? Marker? That's the magic "guy" here! I said that it was something for the computer to figure out and yeah, it does! Using Marker, we can just parse the post's Markdown and render it out as raw HTML in Svelte.
-Another code smell emerges here, as we're fetching the posts JSON again. Why? Can't you pass the HTML from +page.svelte now that you've allowed for it to be pre-renderable? Yes, but it came down to the fact that I was lazy to implement that again as it was my first approach (the implementation might change in the future). This makes it a bit slow and pop-in might occur if your internet is slow, as this is indeed rendering and erroring out _on_ the client.
+Another code smell emerges here, as we're fetching the posts JSON again. Why? Can't you pass the HTML from +page.ts now that you've allowed for it to be pre-renderable? Yes, but it came down to the fact that I was lazy to implement that again as it was my first approach (the implementation might change in the future). This makes it a bit slow and pop-in might occur if your internet is slow, as this is indeed rendering and erroring out _on_ the client.
 
 ## The effects! Wow!
 
