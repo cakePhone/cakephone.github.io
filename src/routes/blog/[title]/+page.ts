@@ -1,6 +1,6 @@
 import type { EntryGenerator } from "./$types";
 
-export async function entries(): Promise<EntryGenerator> {
+export async function entries() {
   let posts: Post[];
   try {
     posts = await (
