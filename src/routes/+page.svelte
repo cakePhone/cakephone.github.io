@@ -10,9 +10,6 @@
   ];
 
   let displaySpeed: number = 0.9;
-
-  let age: number =
-    new Date().getFullYear() - 2006 - (new Date().getMonth() < 4 ? 1 : 0);
 </script>
 
 <section id="landing">
@@ -48,7 +45,7 @@
       <a href="#checkingmyprojects" class="id-anchor"
         >checking<wbr />my<wbr />projects</a
       >
-      <a href="/blog" class="id-anchor">taking<wbr />a<wbr />read</a>
+      <a href="/blog" class="id-anchor">reading<wbr />the<wbr />blog</a>
       <a href="#gettingacookie" class="id-anchor"
         >getting<wbr />a<wbr />cookie</a
       >
