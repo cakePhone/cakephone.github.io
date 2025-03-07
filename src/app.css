@@ -47,8 +47,8 @@ body {
   --ff-headings: "Borel", cursive;
   --fs-headings: 1.8rem;
 
-  --ff-content: "Prata", serif;
-  --fs-content: 1.2rem;
+  --ff-content: "DM Serif Text", serif;
+  --fs-content: 1.4rem;
 
   /* == Sizing == */
   --article-width: min(75ch, 100% - calc(var(--min-margin) * 2));
@@ -59,6 +59,7 @@ body {
   background-color: var(--surface);
   font-family: var(--ff-content);
   font-size: var(--fs-content);
+  font-weight: 400;
 }
 
 body.change-colors {
@@ -88,7 +89,7 @@ header nav {
   height: 1.5rem;
 }
 
-header nav a  {
+header nav a {
   text-decoration: none;
   font-family: var(--ff-headings);
   height: 1.4rem;
