@@ -1,0 +1,58 @@
+<article>
+    {% if post.data.image %}
+        <img src="{{ post.data.image }}" alt="{{ post.data.title }} thumbnail" class="post-image" loading="lazy" style="width: 100%; height: auto; border-radius: 0.5rem;">
+    {% endif %}
+    <div>
+        <h2><a href="{{ post.url }}">{{ post.data.title }}</a></h2>
+        {% if post.data.image %}
+            <p class="description">{{ post.data.description | truncatewords: 7 }}</p>
+        {% else %}
+            <p class="description">{{ post.data.description | truncatewords: 10 }}</p>
+        {% endif %}
+        <p class="post-meta">
+            <span class="post-date">{{ post.data.date | date: "%B %d, %Y" }}</span>
+        </p>
+    </div>
+</article>
+
+<style>
+    article {
+        display: flex;
+        flex-direction: row;
+
+        gap: 1rem;
+
+        border: .25rem dotted var(--primary-500);
+        border-radius: 1rem;
+
+        background-color: var(--primary-100);
+
+        padding: .5rem;
+    }
+
+    article * {
+        margin: 0;
+    }
+
+    h2 {
+        font-size: 1rem;
+    }
+
+    .post-image {
+        border-radius: 0.5rem;
+        max-width: 100px;
+        max-height: 100px;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+    }
+
+    .description {
+        font-size: 0.9rem;
+        color: var(--primary-700);
+    }
+
+    .post-meta {
+        font-size: 0.9rem;
+        color: var(--primary-700);
+    }
+</style>

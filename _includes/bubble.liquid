@@ -1,0 +1,17 @@
+{% if id %}
+<style>
+    .bubble {
+        position: absolute;
+
+        opacity: 0.7;
+
+        aspect-ratio: 1 / 1;
+        height: 10rem;
+        border-radius: 50%;
+        background-color: var(--bg);
+    }
+</style>
+
+<div class="bubble" style="--bg:var(--bubble-{{ id }})">
+</div>
+{% endif %}
