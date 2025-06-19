@@ -23,17 +23,16 @@ header {
     margin: 0;
 }
 
-#left-header ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-
+#left-header nav {
     display: flex;
     gap: 1rem;
+    flex-wrap: wrap;
 }
 
 #left-header a {
     position: relative;
+
+    display: block;
 
     padding: .1rem .75rem;
 
@@ -52,9 +51,9 @@ header {
 
     gap: .5rem;
 
-    max-width: 10rem;
+    max-width: 12rem;
 
-    padding: .5rem;
+    padding: 1rem;
 
     position: relative;
 
@@ -75,7 +74,7 @@ header {
 }
 
 #right-header h2 {
-    font-size: 1rem;
+    font-size: 1.2rem;
 }
 
 #right-header ul {
@@ -86,41 +85,19 @@ header {
 }
 
 #right-header p {
-    font-size: .75rem;
+    font-size: 1rem;
     color: var(--primary-400);
 }
 
 #right-header img {
-    height: 6rem;
-    width: 6rem;
+    height: 7rem;
+    width: 7rem;
 
     border-radius: 50%;
 
     box-shadow: 0 .1rem .5rem rgba(0, 0, 0, 0.7);
 
     object-fit: cover;
-}
-
-@media (max-width: 768px) {
-    #left-header ul {
-        flex-direction: column;
-    }
-
-    #left-header nav {
-        margin-block: 1rem;
-    }
-
-    #right-header {
-        position: absolute;
-
-        background: none;
-        border: none;
-
-        top: 48vh;
-        left: 50%;
-
-        z-index: -1;
-    }
 }
 
 #bubble-container {
@@ -148,7 +125,28 @@ header {
     z-index: -1;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 786px) {
+    #left-header nav {
+        max-width: 7rem;
+    }
+
+    #left-header a {
+        width: 100%;
+        text-align: center;
+    }
+
+    #right-header {
+        position: absolute;
+
+        background: none;
+        border: none;
+
+        top: 48vh;
+        left: 50%;
+
+        z-index: -1;
+    }
+
     #bubble-container {
         align-items: flex-start;
     }

@@ -19,6 +19,8 @@
 }
 
 :root {
+    --bp-small: 786px;
+
     --ff-headings: "Playwrite AU SA", cursive;
 
     --ff-content: "DM Serif Text", serif;
@@ -63,7 +65,7 @@
     --primary-900: #0a1010;
 
     --on-primary-dark: var(--primary-800);
-    --on-primary-light: var(--primary-100);
+    --on-primary-light: var(--primary-50);
 
     --secondary-50: #eef4f6;
     --secondary-100: #cddee4;
@@ -91,13 +93,11 @@
     --terciary-900: #090d11;
 
     --on-terciary-dark: var(--terciary-800);
-    --on-terciary-light: var(--terciary-100);
+    --on-terciary-light: var(--terciary-50);
 
     font-family: var(--ff-content);
     color: var(--fg-900);
 }
-
-@media (prefers-color-scheme: dark) {}
 
 * {
     box-sizing: border-box;
@@ -149,7 +149,7 @@ a {
     line-height: 1.5;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 786px) {
     html {
         font-size: 14pt;
     }
