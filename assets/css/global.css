@@ -1,0 +1,156 @@
+@font-face {
+    font-family: "Playwrite AU SA";
+    src: url("/assets/fonts/PlaywriteAUSA-VariableFont_wght.ttf") format("truetype");
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "DM Serif Text";
+    src: url("/assets/fonts/DMSerifText-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "DM Serif Text";
+    src: url("/assets/fonts/DMSerifText-Bold.ttf") format("truetype");
+    font-weight: 700;
+    font-display: swap;
+}
+
+:root {
+    --bp-small: 786px;
+
+    --ff-headings: "Playwrite AU SA", cursive;
+
+    --ff-content: "DM Serif Text", serif;
+
+    --bg-50: #f2fbe9;
+    --bg-100: #d9f3be;
+    --bg-200: #c0ec93;
+    --bg-300: #a6e467;
+    --bg-400: #8ddc3c;
+    --bg-500: #73c323;
+    --bg-600: #5a981b;
+    --bg-700: #406c13;
+    --bg-800: #26410c;
+    --bg-900: #0d1604;
+
+    --fg-50: #f1f8ed;
+    --fg-100: #d5e9c8;
+    --fg-200: #b9dba4;
+    --fg-300: #9dcc80;
+    --fg-400: #81bd5b;
+    --fg-500: #67a442;
+    --fg-600: #507f33;
+    --fg-700: #395b24;
+    --fg-800: #223716;
+    --fg-900: #0b1207;
+
+    --on-bg-dark: var(--bg-800);
+    --on-bg-light: var(--bg-100);
+
+    --on-fg-dark: var(--fg-800);
+    --on-fg-light: var(--fg-100);
+
+    --primary-50: #eff5f5;
+    --primary-100: #d0e2e1;
+    --primary-200: #b0cfce;
+    --primary-300: #90bbba;
+    --primary-400: #71a8a6;
+    --primary-500: #578e8d;
+    --primary-600: #446f6e;
+    --primary-700: #304f4e;
+    --primary-800: #1d2f2f;
+    --primary-900: #0a1010;
+
+    --on-primary-dark: var(--primary-800);
+    --on-primary-light: var(--primary-50);
+
+    --secondary-50: #eef4f6;
+    --secondary-100: #cddee4;
+    --secondary-200: #acc9d2;
+    --secondary-300: #8bb3c1;
+    --secondary-400: #6a9daf;
+    --secondary-500: #508495;
+    --secondary-600: #3e6674;
+    --secondary-700: #2d4953;
+    --secondary-800: #1b2c32;
+    --secondary-900: #090f11;
+
+    --on-secondary-dark: var(--secondary-800);
+    --on-secondary-light: var(--secondary-100);
+
+    --terciary-50: #eef2f6;
+    --terciary-100: #ccd9e5;
+    --terciary-200: #aabfd4;
+    --terciary-300: #89a5c3;
+    --terciary-400: #678cb2;
+    --terciary-500: #4d7298;
+    --terciary-600: #3c5976;
+    --terciary-700: #2b3f55;
+    --terciary-800: #1a2633;
+    --terciary-900: #090d11;
+
+    --on-terciary-dark: var(--terciary-800);
+    --on-terciary-light: var(--terciary-50);
+
+    font-family: var(--ff-content);
+    color: var(--fg-900);
+}
+
+* {
+    box-sizing: border-box;
+    text-wrap: pretty;
+}
+
+html {
+    font-size: 16pt;
+
+    padding: 0;
+    margin: 0;
+
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--bg-50);
+    background-image: url("/assets/img/bg-pattern.png");
+    background-size: 15rem;
+
+    padding: 0 1rem;
+    margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--ff-headings);
+    color: var(--primary-600);
+
+    line-height: 1.5;
+}
+
+a {
+    color: var(--primary-400);
+    text-decoration: transparent;
+}
+
+a:hover {
+    color: var(--primary-200);
+    text-decoration: underline;
+}
+
+p,
+a {
+    line-height: 1.5;
+}
+
+@media (max-width: 786px) {
+    html {
+        font-size: 14pt;
+    }
+}

@@ -1,0 +1,10 @@
+body {
+    margin: 0;
+
+    max-width: var(--max-width, 60ch);
+    margin: auto;
+}
+
+h1 {
+    text-align: center;
+}
