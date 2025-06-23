@@ -1,0 +1,77 @@
+<style>
+    .cookie-button {
+        background-color: transparent;
+        border: none;
+        font-size: inherit;
+        padding: 0;
+        cursor: pointer;
+
+        z-index: -1;
+    }
+
+    #cookies {
+        position: relative;
+    }
+
+    .falling-cookie {
+        position: absolute;
+        margin: 0;
+        padding: 0;
+        pointer-events: none;
+        top: 0;
+        left: 0;
+    }
+</style>
+<hr/>
+<div>
+    <p>
+        I didn't need the cookies, but you can take some: <span id="cookies"><button class="cookie-button">🍪</button> (click it)</span>
+    </p>
+    <p>
+        &copy; {{ 'now' | date: '%Y' }} Miguel Santos. All rights reserved.
+    </p>
+</div>
+<script>
+    /**
+    * Animate a cookie falling down the page.
+    * @param {number} timestamp - The current timestamp.
+    * @param {HTMLElement} cookie - The cookie element to animate.
+    */
+    function animateCookie(timestamp, cookie, data) {
+        // make a physics based animation
+        const deltaTime = timestamp - data.startTime;
+        const gravity = 0.5; // Gravity effect
+
+        data.velocity = {
+            x: data.velocity.x * 0.99, // Simulate air resistance
+            y: data.velocity.y + gravity * deltaTime / 1000 // Apply gravity
+        };
+        data.position = {
+            x: data.position.x + data.velocity.x * deltaTime / 1000,
+            y: data.position.y + data.velocity.y * deltaTime / 1000
+        };
+
+        cookie.style.transform = `translate(${data.position.x}px, ${data.position.y}px)`;
+        cookie.style.opacity = 1 - (data.position.y / 80); // Fade out as it falls
+
+        requestAnimationFrame((newTimestamp) => {
+            if (data.position.y < 80) {
+                animateCookie(newTimestamp, cookie, data);
+            } else {
+                cookie.remove(); // Remove the cookie when it reaches the bottom
+            }
+        });
+    }
+
+    document.querySelector('.cookie-button').addEventListener('click', () => {
+        const cookieContainer = document.getElementById('cookies');
+        const newCookie = document.createElement('p');
+        newCookie.textContent = '🍪';
+        cookieContainer.appendChild(newCookie);
+
+        requestAnimationFrame((timestamp) => {
+            newCookie.classList.add('falling-cookie');
+            animateCookie(timestamp, newCookie, { startTime: timestamp, velocity: {x: Math.random() * 5 - 2.5, y: -(Math.random() * 10 + 5)}, position: {x: 0, y: 0} });
+        });
+    });
+</script>
