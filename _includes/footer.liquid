@@ -23,14 +23,14 @@
     }
 </style>
 <hr/>
-<div>
+<footer>
     <p>
         I didn't need the cookies, but you can take some: <span id="cookies"><button class="cookie-button">🍪</button> (click it)</span>
     </p>
     <p>
         &copy; {{ 'now' | date: '%Y' }} Miguel Santos. All rights reserved.
     </p>
-</div>
+</footer>
 <script>
     /**
     * Animate a cookie falling down the page.
@@ -40,7 +40,7 @@
     function animateCookie(timestamp, cookie, data) {
         // make a physics based animation
         const deltaTime = timestamp - data.startTime;
-        const gravity = 0.5; // Gravity effect
+        const gravity = 1; // Gravity effect
 
         data.velocity = {
             x: data.velocity.x * 0.99, // Simulate air resistance
