@@ -144,7 +144,7 @@ function bubbleLifeLoop(currentTimestamp, bubbles) {
 document.addEventListener('DOMContentLoaded', () => {
     const bubblesElements = document.getElementsByClassName('bubble');
 
-    if (window.matchMedia(`(prefers-reduced-motion: reduce)`)) {
+    if (window.matchMedia(`(prefers-reduced-motion: reduce)`).matches) {
         const angle_offset = Math.random() * TWO_PI;
         // assign triangle position and return
         for (let i = 0; i < bubblesElements.length; i++) {
