@@ -3,7 +3,7 @@ title: About Me
 description: A little about myself, my journey and my personality.
 date: 2023-07-03
 tags: posts
-layout: post_layout.liquid
+layout: layouts/post_layout.liquid
 image: /assets/img/profile.jpg
 ---
 

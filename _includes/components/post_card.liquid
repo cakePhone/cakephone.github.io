@@ -1,0 +1,61 @@
+<a href="{{ post.url }}">
+    <article class="card">
+        {% if post.data.image %}
+            <img src="{{ post.data.image }}" alt="{{ post.data.title }} thumbnail" class="post-image" loading="lazy" style="width: 100%; height: auto; border-radius: 0.5rem;">
+        {% endif %}
+        <div>
+            <h2>{{ post.data.title }}</h2>
+            {% if post.data.image %}
+                <p class="description">{{ post.data.description | truncatewords: 10 }}</p>
+            {% else %}
+                <p class="description">{{ post.data.description | truncatewords: 10 }}</p>
+            {% endif %}
+            <p class="post-meta">
+                <span class="post-date">{{ post.data.date | date: "%B %d, %Y" }}</span>
+            </p>
+        </div>
+    </article>
+</a>
+
+<style>
+    article {
+        display: flex;
+        flex-direction: row;
+
+        gap: 1rem;
+
+        border-radius: 1rem;
+
+        padding: .5rem;
+    }
+
+    article * {
+        margin: 0;
+    }
+
+    a:hover {
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    h2 {
+        font-size: 1rem;
+        color: var(--primary-600)
+    }
+
+    .post-image {
+        border-radius: 0.5rem;
+        max-width: 100px;
+        max-height: 100px;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+    }
+
+    .description {
+        font-size: 0.9rem;
+    }
+
+    .post-meta {
+        font-size: 0.9rem;
+    }
+</style>

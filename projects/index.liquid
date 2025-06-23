@@ -15,109 +15,15 @@ eleventyImport:
         body {
             max-width: 800px;
         }
-
-        .projects-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .project {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-
-            padding: .5rem;
-
-            border: .25rem dotted var(--primary-400);
-            border-radius: 1rem;
-            transition: transform 0.2s;
-
-            background-color: var(--fg-50);
-
-            overflow: hidden;
-        }
-
-        .project * {
-            margin: 0;
-            padding: 0;
-        }
-
-        .project-info {
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-            gap: 0.25rem;
-
-            padding: 0.25rem;
-        }
-
-        .project h2 {
-            font-size: 1.25rem;
-        }
-
-        .project p {
-            font-size: 1rem;
-        }
-
-        .project img {
-            aspect-ratio: 16 / 9;
-            object-fit: cover;
-
-            border-radius: 0.5rem;
-        }
-
-        .project-links {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .project-links a {
-            display: inline-block;
-            flex-grow: 1;
-
-            padding: 0.5rem 1rem;
-
-            text-decoration: none;
-            text-align: center;
-
-            border-radius: 0.5rem;
-        }
-
-        .project-links a.gh {
-            background-color: var(--primary-400);
-            color: var(--on-primary-light);
-        }
-
-        .project-links a.web {
-            background-color: var(--terciary-400);
-            color: var(--on-terciary-light);
-        }
     </style>
 </head>
 <body>
     <h1>All of my projects and contributions</h1>
     <div class="projects-container">
     {% for project in collections.projects %}
-        <div class="project">
-            {%if project.data.image %}
-                <img src="{{ project.data.image }}" alt="{{ project.data.title }}" style="width: 100%; height: auto;">
-            {% endif %}
-            <div class="project-info">
-                <h2>{{ project.data.title }}</h2>
-                <p>{{ project.data.description }}</p>
-            </div>
-            <div class="project-links">
-                {% if project.data.github %}
-                    <a class="gh" href="{{ project.data.github }}" target="_blank">GitHub</a>
-                {% endif %}
-                {% if project.data.link %}
-                    <a class="web" href="{{ project.data.link }}" target="_blank">Website</a>
-                {% endif %}
-            </div>
-        </div>
+        {% include 'components/project.liquid', project: project %}
     {% endfor %}
     </div>
+    {% include 'layouts/footer.liquid' %}
 </body>
 </html>

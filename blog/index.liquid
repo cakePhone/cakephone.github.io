@@ -30,10 +30,10 @@ eleventyImport:
     <h1>My Blog</h1>
     <div class="posts">
         {% for post in collections.posts reversed %}
-          {% include 'post_card', post: post %}
+          {% include 'components/post_card.liquid', post: post %}
         {% endfor %}
     </div>
-    {% include 'footer' %}
+    {% include 'layouts/footer.liquid' %}
 </body>
 
 </html>

@@ -3,7 +3,7 @@ title: Welcome to the new blog
 description: Yes, I made one after 3 years of this site's existence, and it's rudimentary...
 date: 2025-03-07
 tags: posts
-layout: post_layout.liquid
+layout: layouts/post_layout.liquid
 ---
 # Welcome to the new blog
 
