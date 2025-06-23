@@ -62,6 +62,17 @@
     }
 }
 
+@media (prefers-reduced-motion: reduce) {
+    .title-fade-out {
+        animation: none !important;
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+        backdrop-filter: none !important;
+    }
+}
+
 .post-content {
     font-family: var(--ff-content);
     text-align: justify;

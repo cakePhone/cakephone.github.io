@@ -143,6 +143,18 @@ function bubbleLifeLoop(currentTimestamp, bubbles) {
 
 document.addEventListener('DOMContentLoaded', () => {
     const bubblesElements = document.getElementsByClassName('bubble');
+
+    if (window.matchMedia(`(prefers-reduced-motion: reduce)`)) {
+        const angle_offset = Math.random() * TWO_PI;
+        // assign triangle position and return
+        for (let i = 0; i < bubblesElements.length; i++) {
+            const bubble = bubblesElements[i];
+            position = polarToCartesian({ magnitude: 50, angle: TWO_PI * i / 3 + angle_offset });
+            bubble.style.transform = `translate(${position.x}%, ${position.y}%)`;
+        }
+        return;
+    }
+
     const bubbleCount = bubblesElements.length;
 
     const data = new Array(bubbleCount).fill(null).map(() => ({
@@ -162,6 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
             a: { magnitude: 0, angle: 0 },
         };
     };
+
 
     // Start the animation loop
     requestAnimationFrame((timestamp) => {

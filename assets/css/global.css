@@ -154,3 +154,14 @@ a {
         font-size: 14pt;
     }
 }
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
+
+    body {
+        scroll-behavior: auto;
+    }
+}

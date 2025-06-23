@@ -40,7 +40,7 @@
     function animateCookie(timestamp, cookie, data) {
         // make a physics based animation
         const deltaTime = timestamp - data.startTime;
-        const gravity = 1; // Gravity effect
+        const gravity = 0.7; // Gravity effect
 
         data.velocity = {
             x: data.velocity.x * 0.99, // Simulate air resistance
