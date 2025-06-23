@@ -30,7 +30,7 @@ and I was surely not happy about it. Simply because it was a mess - my code, not
 The amount of workarounds I needed in that codebase started to pile up to spaghetti code levels
 you won't see even in the most vibe coded projects.
 
-The funny part here is what made me finally do this change: [this article](https://justfuckingusehtml.com/)
+The funny part here is what made me finally do this change: [this article](https://justfuckingusehtml.com/).
 Yes, Just Fucking Use HTML... I even learned that giving an ID automatically gives it a JS variable.
 Which I don't use in this project, but it's a nice touch. But that's out of the scope of this article.
 The point here is that this article made me realise that a lot of the things I was doing could be done
