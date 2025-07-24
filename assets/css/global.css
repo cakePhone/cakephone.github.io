@@ -1,6 +1,7 @@
 @font-face {
     font-family: "Playwrite AU SA";
-    src: url("/assets/fonts/PlaywriteAUSA-VariableFont_wght.ttf") format("truetype");
+    src: url("/assets/fonts/PlaywriteAUSA-VariableFont_wght.ttf")
+        format("truetype");
     font-display: swap;
 }
 
@@ -16,6 +17,14 @@
     src: url("/assets/fonts/DMSerifText-Bold.ttf") format("truetype");
     font-weight: 700;
     font-display: swap;
+}
+
+@font-face {
+    font-family: "Noto Sans";
+    src: url("/assets/fonts/NotoSans-VariableFont_wdth\,wght.ttf")
+        format("truetype");
+    font-display: swap;
+    font-weight: 400;
 }
 
 :root {
@@ -120,9 +129,9 @@ a {
 }
 
 .card {
-    padding: .5rem;
+    padding: 0.5rem;
 
-    border: .25rem dotted var(--primary-400);
+    border: 0.25rem dotted var(--primary-400);
     border-radius: 1rem;
 
     color: var(--fg-900);
@@ -163,7 +172,7 @@ a {
 
     .card {
         background-color: var(--fg-300);
-        border: .25rem dotted var(--primary-800);
+        border: 0.25rem dotted var(--primary-800);
         color: var(--primary-900);
     }
 
@@ -210,4 +219,41 @@ a {
         --on-primary-dark: var(--primary-50);
         --on-primary-light: var(--primary-900);
     }
+}
+
+.right-align-text {
+    text-align: right;
+}
+
+.chat-box {
+    line-height: normal;
+    font-size: 0.8rem;
+    font-family: "Noto Sans", sans-serif;
+    width: fit-content;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    max-width: 75%;
+    margin-block: 0.5rem;
+    text-align: left;
+}
+
+.sender {
+    margin-left: auto;
+    border-bottom-right-radius: 0;
+    background-color: var(--fg-400);
+}
+
+.receiver {
+    margin-right: auto;
+    border-bottom-left-radius: 0;
+    background-color: var(--bg-700);
+    color: black;
+}
+
+.ai-response {
+    padding: 0;
+    margin-right: auto;
+    margin-block: 1rem;
+    max-width: 100%;
+    font-weight: 700;
 }
