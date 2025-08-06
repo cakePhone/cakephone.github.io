@@ -1,0 +1,97 @@
+.post-card {
+    display: flex;
+    flex-direction: row;
+
+    overflow: hidden;
+
+    transition: transform 0.3s ease-out;
+
+    gap: 1rem;
+
+    padding: 0.5rem 0;
+
+    position: relative;
+
+    &:hover {
+        text-decoration: none;
+        cursor: pointer;
+        transform: translateX(0.5rem);
+
+        &::before {
+            opacity: 0;
+            animation: flowGradient 2s linear infinite;
+        }
+    }
+
+    * {
+        margin: 0;
+    }
+
+    h2 {
+        font-size: 1rem;
+        color: var(--primary-600);
+    }
+
+    p {
+        font-size: 0.9rem;
+        color: var(--on-bg-dark);
+    }
+
+    img {
+        border-radius: 0.5rem;
+        max-width: 100px;
+        max-height: 100px;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+    }
+
+    .post-meta {
+        opacity: 0.7;
+    }
+}
+
+@keyframes flowGradient {
+    0% {
+        left: -100%;
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        left: 100%;
+        opacity: 0;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    .post-card {
+        p {
+            color: var(--on-bg-light);
+        }
+
+        &::before {
+            background: linear-gradient(
+                90deg,
+                transparent 0%,
+                transparent 10%,
+                rgba(255, 182, 193, 0.3) 25%,
+                rgba(221, 160, 221, 0.3) 40%,
+                rgba(173, 216, 230, 0.3) 60%,
+                rgba(255, 218, 185, 0.3) 75%,
+                transparent 90%,
+                transparent 100%
+            );
+            mask: radial-gradient(
+                ellipse at center,
+                black 40%,
+                transparent 80%
+            );
+            -webkit-mask: radial-gradient(
+                ellipse at center,
+                black 40%,
+                transparent 80%
+            );
+        }
+    }
+}

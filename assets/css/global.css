@@ -116,10 +116,11 @@ h6 {
 a {
     color: var(--primary-400);
     text-decoration: transparent;
+    transition: color 0.1s ease-in-out;
 }
 
 a:hover {
-    color: var(--primary-200);
+    color: var(--primary-400);
     text-decoration: underline;
 }
 
@@ -128,15 +129,20 @@ a {
     line-height: 1.5;
 }
 
+hr {
+    width: 100%;
+}
+
 .card {
     padding: 0.5rem;
 
-    border: 0.25rem dotted var(--primary-400);
     border-radius: 1rem;
 
     color: var(--fg-900);
 
     background-color: var(--fg-50);
+
+    border: 2px solid var(--primary-400);
 }
 
 @media (max-width: 786px) {
@@ -172,7 +178,7 @@ a {
 
     .card {
         background-color: var(--fg-300);
-        border: 0.25rem dotted var(--primary-800);
+        border-color: var(--primary-800);
         color: var(--primary-900);
     }
 

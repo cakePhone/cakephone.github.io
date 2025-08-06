@@ -1,11 +1,12 @@
 header {
     display: flex;
     align-items: center;
+    justify-content: center;
     flex-direction: row;
     gap: 5rem;
 
     height: 100vh;
-    width: fit-content;
+    width: max(fit-content, 70%);
 
     margin-inline: auto;
 }
@@ -25,8 +26,10 @@ header {
 
 #left-header nav {
     display: flex;
-    gap: 1rem;
+    justify-content: space-between;
     flex-wrap: wrap;
+    gap: 1rem 0;
+    padding-left: 0.45rem;
 }
 
 #left-header a {
@@ -34,19 +37,15 @@ header {
 
     display: block;
 
-    padding: .1rem .75rem;
+    padding: 0.1rem 0.75rem;
 }
 
 #right-header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: grid;
 
-    flex-direction: column;
+    gap: 0.5rem;
 
-    gap: .5rem;
-
-    max-width: 12rem;
+    width: 10rem;
 
     position: relative;
 
@@ -56,8 +55,8 @@ header {
 #right-header * {
     margin: 0;
     padding: 0;
-
     text-align: center;
+    width: 100%;
 }
 
 #right-header h2 {
@@ -77,12 +76,13 @@ header {
 }
 
 #right-header img {
-    height: 7rem;
-    width: 7rem;
+    aspect-ratio: 1;
+    margin-inline: auto;
+    width: 80%;
 
     border-radius: 50%;
 
-    box-shadow: 0 .1rem .5rem rgba(0, 0, 0, 0.7);
+    box-shadow: 0 0.1rem 0.5rem rgba(0, 0, 0, 0.7);
 
     object-fit: cover;
 }
@@ -90,9 +90,9 @@ header {
 #bubble-container {
     position: absolute;
 
-    --bubble-1: #EF3E36;
-    --bubble-2: #2E282A;
-    --bubble-3: #17BEBB;
+    --bubble-1: #ef3e36;
+    --bubble-2: #2e282a;
+    --bubble-3: #17bebb;
 
     height: 100vh;
     width: 100vw;
@@ -145,9 +145,9 @@ header {
     }
 
     #bubble-container {
-        --bubble-1: #FF5714;
-        --bubble-2: #6EEB83;
-        --bubble-3: #1BE7FF;
+        --bubble-1: #ff5714;
+        --bubble-2: #6eeb83;
+        --bubble-3: #1be7ff;
 
         filter: blur(40px);
     }

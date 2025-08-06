@@ -15,6 +15,7 @@ eleventyImport:
 
     <link href="/assets/css/global.css" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/general-read.css">
+    <link rel="stylesheet" href="/assets/css/post_card.css">
 
     <style>
         .posts {
@@ -31,6 +32,9 @@ eleventyImport:
     <div class="posts">
         {% for post in collections.posts reversed %}
           {% include 'components/post_card.liquid', post: post %}
+          {% unless forloop.last %}
+            <hr class="divider"/>
+          {% endunless %}
         {% endfor %}
     </div>
     {% include 'layouts/footer.liquid' %}
