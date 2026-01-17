@@ -242,7 +242,7 @@ header {
         align-items: flex-start;
     }
 }
-}
+
 
 @media (prefers-color-scheme: dark) {
     .toc-title {
