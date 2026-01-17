@@ -1,0 +1,67 @@
+<div class="skill-progress">
+    <div class="skill-info">
+        <p>{{ skill_name }}</p>
+        <p>{{ label }}</p>
+    </div>
+    <div class="progress-bar">
+        <div class="progress-fill" style="width: {{ progress }}%;"></div>
+        <div class="progress-separator"></div>
+        <div class="progress-empty"></div>
+    </div>
+</div>
+
+<style>
+    .skill-progress {
+        display: grid;
+        gap: 6px;
+
+        padding-bottom: 12px;
+    }
+
+    .skill-progress p {
+        margin: 0;
+    }
+
+    .skill-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .skill-info p:first-child {
+        text-align: left;
+    }
+
+    .skill-info p:last-child {
+        text-align: right;
+    }
+
+    .progress-bar {
+        display: flex;
+        flex-grow: 1;
+        align-items: center;
+        height: 3px;
+    }
+
+    .progress-fill {
+        height: 100%;
+        background-color: var(--primary-400);
+    }
+
+    .progress-separator {
+        height: 7px;
+        width: 4px;
+        border-radius: 2px;
+        background-color: var(--primary-600);
+    }
+
+    .progress-empty {
+        height: 100%;
+        flex-grow: 1;
+        border-bottom: 3px dotted var(--on-bg-dark);
+    }
+
+    html.theme-dark .progress-empty {
+        border-bottom: 3px dotted var(--on-bg-light);
+    }
+</style>

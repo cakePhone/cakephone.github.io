@@ -156,7 +156,7 @@ header {
     margin: 0 0.5rem;
     min-width: 2rem;
     align-self: center;
-    margin-bottom: 0.25rem;
+    margin-bottom: -0.2rem;
 }
 
 .toc-desc {
