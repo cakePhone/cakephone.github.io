@@ -70,15 +70,17 @@ let animationFrameId = null;
  * @param {Array<Object>} fireflies - An array of firefly data objects.
  * @param {Array<Rectangle>} zones - The valid zones for fireflies.
  */
-function bubbleLifeLoop(currentTimestamp, fireflies, zones) {
+function bubbleLifeLoop(currentTimestamp, fireflies, zones, suppressSchedule = false) {
     // Skip if paused
     if (animationPaused) {
-        animationFrameId = requestAnimationFrame((nextTimestamp) => {
-            bubbleLifeLoop(nextTimestamp, fireflies, zones);
-        });
+        if (!suppressSchedule) {
+            animationFrameId = requestAnimationFrame((nextTimestamp) => {
+                bubbleLifeLoop(nextTimestamp, fireflies, zones);
+            });
+        }
         return;
     }
-    
+
     // Calculate delta time (dt) in seconds
     if (!lastTimestamp) {
         lastTimestamp = currentTimestamp;
@@ -159,10 +161,12 @@ function bubbleLifeLoop(currentTimestamp, fireflies, zones) {
         firefly.element.style.opacity = opacity;
     });
 
-    // Schedule the next frame
-    animationFrameId = requestAnimationFrame((nextTimestamp) => {
-        bubbleLifeLoop(nextTimestamp, fireflies, zones);
-    });
+    // Schedule the next frame (unless caller requested suppressSchedule)
+    if (!suppressSchedule) {
+        animationFrameId = requestAnimationFrame((nextTimestamp) => {
+            bubbleLifeLoop(nextTimestamp, fireflies, zones);
+        });
+    }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -251,6 +255,49 @@ document.addEventListener('DOMContentLoaded', () => {
         requestAnimationFrame((timestamp) => {
             bubbleLifeLoop(timestamp, fireflies, zones);
         });
+
+        // Interval fallback for mobile scrolling: some mobile browsers throttle RAF during scroll/momentum.
+        // When scrolling/touching, start a setInterval-driven loop that calls the same update logic
+        // but suppresses RAF scheduling to avoid duplicate frames.
+        let intervalId = null;
+        let scrollTimeout = null;
+
+        const intervalTick = () => {
+            const now = performance.now();
+            bubbleLifeLoop(now, fireflies, zones, true);
+        };
+
+        const startIntervalLoop = () => {
+            if (intervalId) return;
+            // cancel any pending RAF to avoid double work
+            if (animationFrameId) cancelAnimationFrame(animationFrameId);
+            intervalId = setInterval(intervalTick, 1000 / 60);
+        };
+
+        const stopIntervalLoop = () => {
+            if (!intervalId) return;
+            clearInterval(intervalId);
+            intervalId = null;
+            // reset timestamp to avoid dt spike and resume RAF loop
+            lastTimestamp = 0;
+            requestAnimationFrame((ts) => bubbleLifeLoop(ts, fireflies, zones));
+        };
+
+        // Use passive listeners so we don't block scrolling
+        window.addEventListener('scroll', () => {
+            startIntervalLoop();
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+                stopIntervalLoop();
+            }, 180);
+        }, { passive: true });
+
+        window.addEventListener('touchstart', startIntervalLoop, { passive: true });
+        window.addEventListener('touchmove', startIntervalLoop, { passive: true });
+        window.addEventListener('touchend', () => {
+            clearTimeout(scrollTimeout);
+            stopIntervalLoop();
+        }, { passive: true });
     }
     
     // Pause/resume animation when tab visibility changes
