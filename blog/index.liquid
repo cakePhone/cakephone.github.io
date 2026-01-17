@@ -16,6 +16,7 @@ eleventyImport:
     <link href="/assets/css/global.css" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/general-read.css">
     <link rel="stylesheet" href="/assets/css/post_card.css">
+    <script src="/assets/js/bubble.js" defer></script>
 
     <style>
         .posts {
@@ -28,6 +29,7 @@ eleventyImport:
 </head>
 
 <body>
+    <div id="bubble-container"></div>
     <h1>My Blog</h1>
     <div class="posts">
         {% for post in collections.posts reversed %}

@@ -1,100 +1,84 @@
-/** @typedef {Object} PolarV2
- * @property {number} magnitude - The magnitude of the vector.
- * @property {number} angle - The angle of the vector in radians (counter-clockwise from positive x-axis).
-*/
-
 /** @typedef {Object} Vector2
  * @property {number} x - The x-component of the vector.
  * @property {number} y - The y-component of the vector.
  */
 
+/** @typedef {Object} Rectangle
+ * @property {number} x - The x position (left edge).
+ * @property {number} y - The y position (top edge).
+ * @property {number} width - The width of the rectangle.
+ * @property {number} height - The height of the rectangle.
+ */
+
 const TWO_PI = Math.PI * 2;
 
 /**
- * Adds two 2D Cartesian vectors.
- * @param {Vector2} v1 - The first vector.
- * @param {Vector2} v2 - The second vector.
- * @returns {Vector2} The resultant vector.
+ * Calculates the signed distance field of a point from a rectangle.
+ * Negative inside, positive outside.
+ * @param {Vector2} point - The point to test.
+ * @param {Rectangle} rect - The rectangle bounds.
+ * @returns {number} The signed distance.
  */
-function addV2(v1, v2) {
-    return {
-        x: v1.x + v2.x,
-        y: v1.y + v2.y,
-    };
+function rectangleSDF(point, rect) {
+    const centerX = rect.x + rect.width / 2;
+    const centerY = rect.y + rect.height / 2;
+    
+    const dx = Math.abs(point.x - centerX) - rect.width / 2;
+    const dy = Math.abs(point.y - centerY) - rect.height / 2;
+    
+    const outsideDistance = Math.sqrt(Math.max(dx, 0) ** 2 + Math.max(dy, 0) ** 2);
+    const insideDistance = Math.min(Math.max(dx, dy), 0);
+    
+    return outsideDistance + insideDistance;
 }
 
 /**
- * Converts polar coordinates to Cartesian coordinates.
- * @param {PolarV2} p - The polar vector.
- * @returns {Vector2} The equivalent Cartesian vector.
+ * Gets the gradient direction (normalized) pointing back towards the rectangle.
+ * @param {Vector2} point - The point to test.
+ * @param {Rectangle} rect - The rectangle bounds.
+ * @returns {Vector2} Normalized direction vector towards rectangle.
  */
-function polarToCartesian(p) {
-    return { x: p.magnitude * Math.cos(p.angle), y: p.magnitude * Math.sin(p.angle) };
-}
-
-/**
- * Converts Cartesian coordinates to polar coordinates.
- * @param {Vector2} c - The Cartesian vector.
- * @returns {PolarV2} The equivalent polar vector.
- */
-function cartesianToPolar(c) {
-    let angle = Math.atan2(c.y, c.x);
-    // Ensure angle is always positive (0 to 2*PI)
-    if (angle < 0) {
-        angle += TWO_PI;
-    }
-    return {
-        magnitude: Math.sqrt(c.x * c.x + c.y * c.y),
-        angle: angle,
-    };
-}
-
-/**
- * Adds two polar vectors and returns the resultant vector in polar coordinates.
- * This is done by converting to Cartesian, adding, and converting back.
- *
- * @param {PolarV2} vec1 - The first polar vector.
- * @param {PolarV2} vec2 - The second polar vector.
- * @returns {PolarV2} The resultant polar vector.
- */
-function addTwoPolarVectors(vec1, vec2) {
-    const c1 = polarToCartesian(vec1);
-    const c2 = polarToCartesian(vec2);
-    return cartesianToPolar(addV2(c1, c2));
-}
-
-/**
- * Scales a polar vector by a given factor.
- * The angle remains the same, only the length changes.
- * @param {PolarV2} p - The polar vector to scale.
- * @param {number} scale - The scaling factor.
- * @returns {PolarV2} The scaled polar vector.
- */
-function scalePolarVector(p, scale) {
-    return {
-        magnitude: p.magnitude * scale,
-        angle: p.angle,
-    };
-}
-
-function dotCartesian(v1, v2) {
-    return v1.x * v2.x + v1.y * v2.y;
-}
-
-function dotPolar(p1, p2) {
-    const c1 = polarToCartesian(p1);
-    const c2 = polarToCartesian(p2);
-    return dotCartesian(c1, c2);
+function rectangleGradient(point, rect) {
+    const centerX = rect.x + rect.width / 2;
+    const centerY = rect.y + rect.height / 2;
+    
+    const dx = point.x - centerX;
+    const dy = point.y - centerY;
+    
+    const clampedX = Math.max(-rect.width / 2, Math.min(rect.width / 2, dx));
+    const clampedY = Math.max(-rect.height / 2, Math.min(rect.height / 2, dy));
+    
+    const targetX = centerX + clampedX;
+    const targetY = centerY + clampedY;
+    
+    const dirX = targetX - point.x;
+    const dirY = targetY - point.y;
+    const length = Math.sqrt(dirX * dirX + dirY * dirY);
+    
+    if (length < 0.001) return { x: 0, y: 0 };
+    
+    return { x: dirX / length, y: dirY / length };
 }
 
 let lastTimestamp = 0;
+let animationPaused = false;
+let animationFrameId = null;
 
 /**
- * Manages the life cycle and movement of bubbles.
+ * Manages the life cycle and movement of fireflies.
  * @param {DOMHighResTimeStamp} currentTimestamp - The current time provided by requestAnimationFrame.
- * @param {Array<Object>} bubbles - An array of bubble data objects.
+ * @param {Array<Object>} fireflies - An array of firefly data objects.
+ * @param {Array<Rectangle>} zones - The valid zones for fireflies.
  */
-function bubbleLifeLoop(currentTimestamp, bubbles) {
+function bubbleLifeLoop(currentTimestamp, fireflies, zones) {
+    // Skip if paused
+    if (animationPaused) {
+        animationFrameId = requestAnimationFrame((nextTimestamp) => {
+            bubbleLifeLoop(nextTimestamp, fireflies, zones);
+        });
+        return;
+    }
+    
     // Calculate delta time (dt) in seconds
     if (!lastTimestamp) {
         lastTimestamp = currentTimestamp;
@@ -102,82 +86,185 @@ function bubbleLifeLoop(currentTimestamp, bubbles) {
     const dt = (currentTimestamp - lastTimestamp) / 1000; // dt in seconds
     lastTimestamp = currentTimestamp;
 
-    bubbles.forEach((bubble) => {
-        // if the bubble is way too far for whatever reason, reset it
-        if (Math.abs(bubble.p.magnitude) > 1000)
-            bubble.p.magnitude = 0;
-
-        // If the bubble is too far from the center, pull it back
-        if (bubble.p.magnitude > 100) {
-            bubble.a.magnitude = 0.3 * (100 - bubble.p.magnitude);
+    fireflies.forEach((firefly) => {
+        // Update flicker timing
+        firefly.flickerTimer += dt;
+        
+        // Random direction changes for more organic movement
+        if (Math.random() < 0.03) {
+            firefly.angle += (Math.random() - 0.5) * Math.PI / 3;
         }
-        else {
-            bubble.a.magnitude = 0; // No acceleration if within bounds
+        
+        // Find the zone this firefly belongs to
+        const zone = zones[firefly.zoneIndex];
+        
+        // Calculate signed distance from zone
+        const sdf = rectangleSDF(firefly.position, zone);
+        
+        // If outside or close to edge, steer back towards zone
+        if (sdf > -20) {
+            const gradient = rectangleGradient(firefly.position, zone);
+            
+            // Only steer if gradient is non-zero
+            if (gradient.x !== 0 || gradient.y !== 0) {
+                // Calculate how much to steer (more aggressive when further out)
+                const steerStrength = Math.max(0, sdf + 20) * 0.05;
+                
+                // Blend current angle with direction back to zone
+                const targetAngle = Math.atan2(gradient.y, gradient.x);
+                let angleDiff = targetAngle - firefly.angle;
+                
+                // Normalize angle difference to [-PI, PI]
+                while (angleDiff > Math.PI) angleDiff -= TWO_PI;
+                while (angleDiff < -Math.PI) angleDiff += TWO_PI;
+                
+                firefly.angle += angleDiff * Math.min(1, steerStrength);
+            }
         }
-
-        bubble.a.angle = bubble.p.angle + Math.PI; // Point towards the center
-
-        bubble.v = addTwoPolarVectors(bubble.v, scalePolarVector(bubble.a, bubble.a.magnitude * dt));
-        // Cap velocity
-        bubble.v.magnitude %= 10;
-
-
-        bubble.p = addTwoPolarVectors(bubble.p, scalePolarVector(bubble.v, bubble.v.magnitude * dt));
-
-
-        // Normalize all angles to be within [0, 2*PI)
-        bubble.p.angle = (bubble.p.angle % TWO_PI + TWO_PI) % TWO_PI;
-        bubble.v.angle = (bubble.v.angle % TWO_PI + TWO_PI) % TWO_PI;
-
-        // Cartesian coordinates for CSS transform
-        const cart = polarToCartesian(bubble.p);
-        // Update element position using CSS transform
-        bubble.element.style.transform = `translate(${cart.x}%, ${cart.y}%)`;
+        
+        // Slight random drift in angle for organic movement
+        firefly.angle += (Math.sin(currentTimestamp * 0.002 + firefly.offset) * 0.02) * dt;
+        
+        // Update velocity with slight damping and variation
+        const baseSpeed = 30 + Math.sin(currentTimestamp * 0.001 + firefly.offset) * 10;
+        firefly.velocity = baseSpeed;
+        
+        // Move in the direction of the angle
+        const velocityX = Math.cos(firefly.angle) * firefly.velocity * dt;
+        const velocityY = Math.sin(firefly.angle) * firefly.velocity * dt;
+        
+        firefly.position.x += velocityX;
+        firefly.position.y += velocityY;
+        
+        // Flicker effect - fireflies glow and dim
+        const flickerCycle = Math.sin(firefly.flickerTimer * firefly.flickerSpeed) * 0.5 + 0.5;
+        const opacity = 0.3 + flickerCycle * 0.5;
+        const scale = 0.8 + flickerCycle * 0.3;
+        
+        // Occasional bright flash
+        let flash = 1;
+        if (firefly.flickerTimer > firefly.nextFlash) {
+            flash = 1 + Math.max(0, 1 - (firefly.flickerTimer - firefly.nextFlash) * 4);
+            if (firefly.flickerTimer > firefly.nextFlash + 0.25) {
+                firefly.nextFlash = firefly.flickerTimer + 2 + Math.random() * 3;
+            }
+        }
+        
+        // Update element position and appearance
+        firefly.element.style.left = `${firefly.position.x}px`;
+        firefly.element.style.top = `${firefly.position.y}px`;
+        firefly.element.style.transform = `translate(-50%, -50%) scale(${scale * flash})`;
+        firefly.element.style.opacity = opacity * Math.min(flash, 1.5);
     });
 
     // Schedule the next frame
-    requestAnimationFrame((nextTimestamp) => {
-        bubbleLifeLoop(nextTimestamp, bubbles);
+    animationFrameId = requestAnimationFrame((nextTimestamp) => {
+        bubbleLifeLoop(nextTimestamp, fireflies, zones);
     });
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    const bubblesElements = document.getElementsByClassName('bubble');
-
-    if (window.matchMedia(`(prefers-reduced-motion: reduce)`).matches) {
-        const angle_offset = Math.random() * TWO_PI;
-        // assign triangle position and return
-        for (let i = 0; i < bubblesElements.length; i++) {
-            const bubble = bubblesElements[i];
-            position = polarToCartesian({ magnitude: 50, angle: TWO_PI * i / 3 + angle_offset });
-            bubble.style.transform = `translate(${position.x}%, ${position.y}%)`;
-        }
+    const container = document.getElementById('bubble-container');
+    
+    if (!container) {
         return;
     }
-
-    const bubbleCount = bubblesElements.length;
-
-    const data = new Array(bubbleCount).fill(null).map(() => ({
-        element: null,
-        // Corrected: 'length' instead of 'lenght'
-        p: { magnitude: 0, angle: 0 },
-        v: { magnitude: 0, angle: 0 },
-        a: { magnitude: 0, angle: 0 },
-    }));
-
-    for (let i = 0; i < bubbleCount; i++) {
-        data[i] = {
-            element: bubblesElements[i],
-            // Random initial position and velocity
-            p: { magnitude: Math.random() * 20, angle: Math.random() * TWO_PI },
-            v: { magnitude: 5 + Math.random() * 5, angle: Math.random() * TWO_PI }, // Ensure some min speed
-            a: { magnitude: 0, angle: 0 },
-        };
-    };
-
-
-    // Start the animation loop
-    requestAnimationFrame((timestamp) => {
-        bubbleLifeLoop(timestamp, data);
+    
+    function setupFireflies() {
+        // Clear existing fireflies
+        container.innerHTML = '';
+        lastTimestamp = 0;
+        
+        const viewportWidth = document.documentElement.clientWidth;
+        const viewportHeight = document.documentElement.clientHeight;
+        const isMobile = viewportWidth <= 786;
+        
+        let zones = [];
+        let fireflyCount;
+        
+        if (isMobile) {
+            // Top and bottom zones (15% each)
+            const zoneHeight = viewportHeight * 0.15;
+            zones = [
+                { x: 0, y: 0, width: viewportWidth, height: zoneHeight }, // Top
+                { x: 0, y: viewportHeight - zoneHeight, width: viewportWidth, height: zoneHeight } // Bottom
+            ];
+            fireflyCount = 10; // 5 per zone
+        } else {
+            // Left and right zones (15% each)
+            const zoneWidth = viewportWidth * 0.15;
+            zones = [
+                { x: 0, y: 0, width: zoneWidth, height: viewportHeight }, // Left
+                { x: viewportWidth - zoneWidth, y: 0, width: zoneWidth, height: viewportHeight } // Right
+            ];
+            fireflyCount = 30; // 15 per zone
+        }
+        
+        const fireflies = [];
+        const firefliesPerZone = Math.floor(fireflyCount / zones.length);
+        
+        // Create fireflies
+        for (let zoneIndex = 0; zoneIndex < zones.length; zoneIndex++) {
+            const zone = zones[zoneIndex];
+            
+            for (let i = 0; i < firefliesPerZone; i++) {
+                const firefly = document.createElement('div');
+                firefly.className = 'bubble';
+                container.appendChild(firefly);
+                
+                // Random position within zone
+                const x = zone.x + Math.random() * zone.width;
+                const y = zone.y + Math.random() * zone.height;
+                
+                fireflies.push({
+                    element: firefly,
+                    position: { x, y },
+                    angle: Math.random() * TWO_PI,
+                    velocity: 30 + Math.random() * 20,
+                    zoneIndex: zoneIndex,
+                    offset: Math.random() * TWO_PI * 10,
+                    flickerSpeed: 2 + Math.random() * 3,
+                    flickerTimer: Math.random() * TWO_PI,
+                    nextFlash: 2 + Math.random() * 3,
+                });
+            }
+        }
+        
+        if (window.matchMedia(`(prefers-reduced-motion: reduce)`).matches) {
+            // Static positions for reduced motion
+            fireflies.forEach((firefly) => {
+                firefly.element.style.left = `${firefly.position.x}px`;
+                firefly.element.style.top = `${firefly.position.y}px`;
+                firefly.element.style.opacity = '0.5';
+            });
+            return;
+        }
+        
+        // Start the animation loop
+        requestAnimationFrame((timestamp) => {
+            bubbleLifeLoop(timestamp, fireflies, zones);
+        });
+    }
+    
+    // Pause/resume animation when tab visibility changes
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+            animationPaused = true;
+        } else {
+            animationPaused = false;
+            lastTimestamp = 0; // Reset timestamp to avoid large dt jump
+        }
+    });
+    
+    // Initial setup
+    setupFireflies();
+    
+    // Re-setup on resize
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            setupFireflies();
+        }, 250);
     });
 });

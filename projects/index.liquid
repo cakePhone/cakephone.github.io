@@ -10,6 +10,7 @@ eleventyImport:
     <title>Miguel's Projects</title>
     <link rel="stylesheet" href="/assets/css/global.css">
     <link rel="stylesheet" href="/assets/css/general-read.css">
+    <script src="/assets/js/bubble.js" defer></script>
 
     <style>
         body {
@@ -18,6 +19,7 @@ eleventyImport:
     </style>
 </head>
 <body>
+    <div id="bubble-container"></div>
     <h1>All of my projects and contributions</h1>
     <div class="projects-container">
     {% for project in collections.projects %}
