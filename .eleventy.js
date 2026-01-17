@@ -18,6 +18,19 @@ module.exports = function (eleventyConfig) {
         return markdownIt().render(markdownString);
     });
 
+    eleventyConfig.addFilter("calculateAge", function(birthDate) {
+        const birth = new Date(birthDate);
+        const now = new Date();
+        let age = now.getFullYear() - birth.getFullYear();
+        const monthDiff = now.getMonth() - birth.getMonth();
+
+        // Adjust if the birthday hasn't occurred yet this year
+        if (monthDiff < 0 || (monthDiff === 0 && now.getDate() < birth.getDate())) {
+        age--;
+        }
+        return age;
+    });
+
     eleventyConfig.addCollection("projects", function (collection) {
         return collection.getFilteredByGlob("projects/*.md").sort((a, b) => {
             return new Date(b.date) - new Date(a.date); // Sort by date, newest first
