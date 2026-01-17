@@ -8,12 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
     if (!ambientSky) return;
     
-    // Check for saved theme preference or use system preference
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-        document.documentElement.classList.add(`theme-${savedTheme}`);
-    }
-    
     ambientSky.addEventListener('click', () => {
         const html = document.documentElement;
         const isDark = html.classList.contains('theme-dark') || 
