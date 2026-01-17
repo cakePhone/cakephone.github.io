@@ -5,10 +5,11 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     const ambientSky = document.querySelector('.ambient-sky');
+    const ambientHit = document.querySelector('.ambient-hit');
     
-    if (!ambientSky) return;
+    if (!ambientSky && !ambientHit) return;
     
-    ambientSky.addEventListener('click', () => {
+    const toggleTheme = () => {
         const html = document.documentElement;
         const isDark = html.classList.contains('theme-dark') || 
             (!html.classList.contains('theme-light') && 
@@ -24,5 +25,8 @@ document.addEventListener('DOMContentLoaded', () => {
             html.classList.add('theme-dark');
             localStorage.setItem('theme', 'dark');
         }
-    });
+    };
+
+    if (ambientSky) ambientSky.addEventListener('click', toggleTheme);
+    if (ambientHit) ambientHit.addEventListener('click', toggleTheme);
 });
