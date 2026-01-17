@@ -163,26 +163,7 @@ hr {
 }
 
 @media (prefers-color-scheme: dark) {
-    body {
-        background-color: var(--bg-100);
-         background-image: none;
-    }
-
-    a {
-        color: var(--primary-600);
-    }
-
-    a:hover {
-        color: var(--primary-800);
-    }
-
-    .card {
-        background-color: var(--fg-300);
-        border-color: var(--primary-800);
-        color: var(--primary-900);
-    }
-
-    :root {
+    :root:not(.theme-light):not(.theme-dark) {
         --bg-900: #f0f0f5;
         --bg-800: #d1d2e1;
         --bg-700: #b2b4cd;
@@ -224,6 +205,25 @@ hr {
 
         --on-primary-dark: var(--primary-50);
         --on-primary-light: var(--primary-900);
+    }
+
+    :root:not(.theme-light):not(.theme-dark) body {
+        background-color: var(--bg-100);
+        background-image: none;
+    }
+
+    :root:not(.theme-light):not(.theme-dark) a {
+        color: var(--primary-600);
+    }
+
+    :root:not(.theme-light):not(.theme-dark) a:hover {
+        color: var(--primary-800);
+    }
+
+    :root:not(.theme-light):not(.theme-dark) .card {
+        background-color: var(--fg-300);
+        border-color: var(--primary-800);
+        color: var(--primary-900);
     }
 }
 
