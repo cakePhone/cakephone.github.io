@@ -19,7 +19,7 @@ eleventyImport:
     </style>
 </head>
 <body>
-    <div id="bubble-container"></div>
+    {% include 'components/ambient.liquid' %}
     <h1>All of my projects and contributions</h1>
     <div class="projects-container">
     {% for project in collections.projects %}

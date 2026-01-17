@@ -87,8 +87,19 @@ function bubbleLifeLoop(currentTimestamp, fireflies, zones) {
     lastTimestamp = currentTimestamp;
 
     fireflies.forEach((firefly) => {
-        // Update flicker timing
-        firefly.flickerTimer += dt;
+        // Update size-based dimming
+        firefly.sizeChangeTimer += dt;
+        
+        // Pick a new target size periodically
+        if (firefly.sizeChangeTimer >= firefly.nextSizeChange) {
+            firefly.targetSize = 2 + Math.random() * 4; // Random target between 2-6px
+            firefly.nextSizeChange = 0.5 + Math.random() * 2; // Next change in 0.5-2.5s
+            firefly.sizeChangeTimer = 0;
+        }
+        
+        // Smoothly interpolate current size towards target (lerp)
+        const lerpSpeed = 2; // How fast to interpolate (higher = faster)
+        firefly.currentSize += (firefly.targetSize - firefly.currentSize) * lerpSpeed * dt;
         
         // Random direction changes for more organic movement
         if (Math.random() < 0.03) {
@@ -136,25 +147,16 @@ function bubbleLifeLoop(currentTimestamp, fireflies, zones) {
         firefly.position.x += velocityX;
         firefly.position.y += velocityY;
         
-        // Flicker effect - fireflies glow and dim
-        const flickerCycle = Math.sin(firefly.flickerTimer * firefly.flickerSpeed) * 0.5 + 0.5;
-        const opacity = 0.3 + flickerCycle * 0.5;
-        const scale = 0.8 + flickerCycle * 0.3;
+        // Calculate opacity based on current size (larger = brighter)
+        const sizeNormalized = (firefly.currentSize - 2) / 4; // 0 to 1
+        const opacity = 0.3 + sizeNormalized * 0.5;
         
-        // Occasional bright flash
-        let flash = 1;
-        if (firefly.flickerTimer > firefly.nextFlash) {
-            flash = 1 + Math.max(0, 1 - (firefly.flickerTimer - firefly.nextFlash) * 4);
-            if (firefly.flickerTimer > firefly.nextFlash + 0.25) {
-                firefly.nextFlash = firefly.flickerTimer + 2 + Math.random() * 3;
-            }
-        }
-        
-        // Update element position and appearance
+        // Update element position and size
         firefly.element.style.left = `${firefly.position.x}px`;
         firefly.element.style.top = `${firefly.position.y}px`;
-        firefly.element.style.transform = `translate(-50%, -50%) scale(${scale * flash})`;
-        firefly.element.style.opacity = opacity * Math.min(flash, 1.5);
+        firefly.element.style.width = `${firefly.currentSize}px`;
+        firefly.element.style.height = `${firefly.currentSize}px`;
+        firefly.element.style.opacity = opacity;
     });
 
     // Schedule the next frame
@@ -226,6 +228,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     flickerSpeed: 2 + Math.random() * 3,
                     flickerTimer: Math.random() * TWO_PI,
                     nextFlash: 2 + Math.random() * 3,
+                    // Size-based dimming
+                    currentSize: 2 + Math.random() * 4, // Current size (2-6px)
+                    targetSize: 2 + Math.random() * 4,  // Target size to interpolate towards
+                    sizeChangeTimer: 0,                 // Timer for changing target
+                    nextSizeChange: 0.5 + Math.random() * 2, // When to pick new target
                 });
             }
         }
